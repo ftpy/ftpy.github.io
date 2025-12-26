@@ -1,86 +1,1222 @@
 <!DOCTYPE html>
-<html  oncontextmenu=self.event.returnValue=false onselectstart="return false">
-<head oncontextmenu=self.event.returnValue=false onselectstart="return false">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="source/js/header.js"></script>
-    <title>小鱼主页</title>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>罗小鱼 · 个人导航</title>
+    
+    <!-- 添加网站图标 (favicon) -->
+    <link rel="icon" href="https://img.icons8.com/color/48/google-photos-new.png">
+    <link rel="shortcut icon" href="https://img.icons8.com/color/48/google-photos-new.png">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/color/96/google-photos-new.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* 点击特效 */
+        .click-effect {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.7;
+            animation: ripple 1s ease-out forwards;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 25px;
+        }
+        
+        /* 修改头像容器，移除溢出隐藏 */
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b8b 0%, #ff9a00 100%); /* 改为粉色到橙色的渐变 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0;
+            box-shadow: 0 10px 25px rgba(255, 107, 139, 0.3); /* 调整阴影颜色 */
+            position: relative;
+            /* 移除 overflow: hidden; 让耳朵可以显示出来 */
+            border: 5px solid white;
+            animation: pulse 2s infinite alternate;
+        }
+        
+        /* 兔子头像样式 - 确保正确显示 */
+        .rabbit-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        /* 修改兔子耳朵样式，使它们更明显 */
+        .rabbit-ear {
+            position: absolute;
+            top: -15px; /* 调整位置，确保耳朵根部在头像内 */
+            width: 35px;
+            height: 55px; /* 缩短耳朵长度 */
+            background-color: #ff9a00; /* 橙色耳朵 */
+            border-radius: 50% 50% 0 0;
+            animation: earMove 2s infinite alternate;
+            z-index: 1;
+            border: 3px solid white; /* 添加白色边框，使耳朵更明显 */
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* 添加阴影增加立体感 */
+        }
+        
+        .rabbit-ear.left {
+            left: 35px; /* 调整位置，确保根部在头像内 */
+            transform: rotate(-10deg);
+        }
+        
+        .rabbit-ear.right {
+            right: 35px; /* 调整位置，确保根部在头像内 */
+            transform: rotate(10deg);
+        }
+        
+        /* 修改兔子脸部样式 */
+        .rabbit-face {
+            width: 110px;
+            height: 110px;
+            background-color: white; /* 白色脸部 */
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #ffd9e3; /* 添加浅粉色边框 */
+        }
+        
+        /* 修改兔子眼睛，使其更明显 */
+        .rabbit-eye {
+            position: absolute;
+            top: 35px;
+            width: 18px;
+            height: 25px; /* 调整高度，使眼睛更椭圆 */
+            background-color: #333; /* 深色眼睛 */
+            border-radius: 50%;
+            animation: blink 4s infinite;
+            border: 2px solid white; /* 白色边框使眼睛更清晰 */
+        }
+        
+        .rabbit-eye.left {
+            left: 25px;
+        }
+        
+        .rabbit-eye.right {
+            right: 25px;
+        }
+        
+        /* 修改兔子鼻子 */
+        .rabbit-nose {
+            position: absolute;
+            top: 65px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 15px;
+            background-color: #ff6b8b; /* 粉色鼻子 */
+            border-radius: 50%;
+            z-index: 3;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 修改兔子嘴巴 */
+        .rabbit-mouth {
+            position: absolute;
+            top: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 20px;
+            border-bottom: 4px solid #ff6b8b; /* 粉色嘴巴 */
+            border-radius: 0 0 30px 30px;
+        }
+        
+        /* 兔子动画 */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        @keyframes earMove {
+            0% { transform: rotate(-10deg); }
+            50% { transform: rotate(0deg); }
+            100% { transform: rotate(-10deg); }
+        }
+        
+        @keyframes blink {
+            0%, 96%, 100% { height: 25px; }
+            97%, 99% { height: 5px; }
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 25px;
+            min-height: 30px;
+        }
+        
+        .tagline {
+            display: inline-block;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
+        }
+        
+        /* 搜索框样式 */
+        .search-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .search-title {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 100%;
+            display: flex;
+            background-color: white;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid #eef2f7;
+        }
+        
+        .search-box:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 18px 25px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #2c3e50;
+        }
+        
+        .search-button {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 0 35px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .search-button:hover {
+            background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
+            padding: 0 40px;
+        }
+        
+        .search-button i {
+            font-size: 18px;
+        }
+        
+        .search-hint {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #7f8c8d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .search-hint i {
+            color: #4CAF50;
+        }
+        
+        .main-link {
+            display: inline-block;
+            background-color: #fff;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #6a11cb;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 40px;
+            border: 2px solid #eef2f7;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            color: #2575fc;
+        }
+        
+        .main-link:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .main-link:hover:after {
+            left: 100%;
+        }
+        
+        .main-link i {
+            margin-right: 10px;
+        }
+        
+        /* 分类分组样式 */
+        .category-group {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eaeaea;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .category-group:last-child {
+            border-bottom: none;
+            margin-bottom: 20px;
+        }
+        
+        .category-title {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            padding: 0 15px;
+        }
+        
+        .category-title:before, .category-title:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 2px;
+        }
+        
+        .category-title:before {
+            left: -60px;
+        }
+        
+        .category-title:after {
+            right: -60px;
+        }
+        
+        /* 分类标签样式 */
+        .category-tag {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .category-tech { background-color: #3498db; }
+        .category-device { background-color: #2ecc71; }
+        .category-tool { background-color: #e74c3c; }
+        .category-lvse { background-color: #3ce73c; }
+        .category-entertainment { background-color: #9b59b6; }
+        .category-shopping { background-color: #f39c12; }
+        .category-social { background-color: #1abc9c; }
+        .category-education { background-color: #34495e; }
+        .category-travel { background-color: #e67e22; }
+        .category-search { background-color: #27ae60; }
+        
+        /* 卡片网格 - 固定宽度布局 */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 默认每行4个卡片 */
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* 统一卡片大小 */
+        .nav-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #2c3e50;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+            height: 220px; /* 固定高度 */
+            min-height: 220px;
+        }
+        
+        .nav-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-card:hover:before {
+            transform: scaleX(1);
+        }
+        
+        .nav-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 28px;
+            color: white;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .nav-card:hover .nav-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        .nav-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .nav-desc {
+            font-size: 14px;
+            color: #7f8c8d;
+            line-height: 1.4;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 不同图标的背景色 */
+        .blog { background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); }
+        .vivo { background: linear-gradient(135deg, #A3BFFA 0%, #6991C7 100%); }
+        .honor { background: linear-gradient(135deg, #FFECD2 0%, #FCB69F 100%); }
+        .sunflower { background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); }
+        .search { background: linear-gradient(135deg, #D4FC79 0%, #96E6A1 100%); }
+        .miit { background: linear-gradient(135deg, #FCCF31 0%, #F55555 100%); }
+        .github { background: linear-gradient(135deg, #333 0%, #6e5494 100%); }
+        .music { background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%); }
+        .cloud { background: linear-gradient(135deg, #89F7FE 0%, #66A6FF 100%); }
+        .video { background: linear-gradient(135deg, #FF5858 0%, #F09819 100%); }
+        .shopping { background: linear-gradient(135deg, #FFD26F 0%, #3677FF 100%); }
+        .social { background: linear-gradient(135deg, #A8FF78 0%, #78FFD6 100%); }
+        .tools { background: linear-gradient(135deg, #FFAFBD 0%, #ffc3a0 100%); }
+        .education { background: linear-gradient(135deg, #FFD89B 0%, #19547B 100%); }
+        .travel { background: linear-gradient(135deg, #FFECD2 0%, #FCB69F 100%); }
+        
+        footer {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 14px;
+            padding: 20px 0;
+            border-top: 1px solid #ecf0f1;
+            width: 100%;
+            background-color: #f5f7fa;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 响应式设计 - 控制每行显示卡片数量 */
+        @media (max-width: 1200px) {
+            .nav-grid {
+                grid-template-columns: repeat(3, 1fr); /* 每行3个卡片 */
+                max-width: 1000px;
+            }
+            
+            .nav-card {
+                height: 210px;
+                min-height: 210px;
+            }
+            
+            .search-container {
+                max-width: 700px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .nav-grid {
+                grid-template-columns: repeat(2, 1fr); /* 每行2个卡片 */
+                max-width: 700px;
+                gap: 20px;
+            }
+            
+            .category-title:before, .category-title:after {
+                width: 30px;
+            }
+            
+            .category-title:before {
+                left: -40px;
+            }
+            
+            .category-title:after {
+                right: -40px;
+            }
+            
+            h1 {
+                font-size: 26px;
+            }
+            
+            .avatar-container {
+                width: 130px;
+                height: 130px;
+            }
+            
+            /* 调整响应式设计中的兔子样式 */
+            .rabbit-ear {
+                top: -10px;
+                width: 30px;
+                height: 45px;
+            }
+            
+            .rabbit-ear.left {
+                left: 30px;
+            }
+            
+            .rabbit-ear.right {
+                right: 30px;
+            }
+            
+            .rabbit-face {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .category-tag {
+                font-size: 10px;
+                padding: 2px 8px;
+            }
+            
+            .category-title {
+                font-size: 20px;
+            }
+            
+            .nav-card {
+                height: 200px;
+                min-height: 200px;
+                padding: 20px 15px;
+            }
+            
+            .nav-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .search-container {
+                max-width: 600px;
+            }
+            
+            .search-input {
+                padding: 16px 20px;
+            }
+            
+            .search-button {
+                padding: 0 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-grid {
+                grid-template-columns: 1fr; /* 每行1个卡片 */
+                max-width: 400px;
+                gap: 15px;
+            }
+            
+            body {
+                padding: 0;
+            }
+            
+            .main-link {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+            
+            .category-title {
+                font-size: 18px;
+            }
+            
+            .category-title:before, .category-title:after {
+                display: none;
+            }
+            
+            .avatar-container {
+                width: 110px;
+                height: 110px;
+            }
+            
+            .nav-card {
+                height: 190px;
+                min-height: 190px;
+                padding: 18px 12px;
+            }
+            
+            .nav-title {
+                font-size: 18px;
+            }
+            
+            .nav-desc {
+                font-size: 13px;
+            }
+            
+            /* 调整小屏幕下的兔子样式 */
+            .rabbit-ear {
+                top: -8px;
+                width: 25px;
+                height: 35px;
+            }
+            
+            .rabbit-ear.left {
+                left: 25px;
+            }
+            
+            .rabbit-ear.right {
+                right: 25px;
+            }
+            
+            .rabbit-face {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .rabbit-eye {
+                top: 20px;
+                width: 15px;
+                height: 20px;
+            }
+            
+            .rabbit-nose {
+                top: 55px;
+            }
+            
+            .rabbit-mouth {
+                top: 60px;
+            }
+            
+            .search-container {
+                max-width: 90%;
+                margin-bottom: 30px;
+            }
+            
+            .search-title {
+                font-size: 18px;
+            }
+            
+            .search-box {
+                flex-direction: column;
+                border-radius: 20px;
+            }
+            
+            .search-input {
+                padding: 15px 20px;
+                border-bottom: 1px solid #eef2f7;
+            }
+            
+            .search-button {
+                padding: 15px;
+                width: 100%;
+            }
+            
+            .search-button:hover {
+                padding: 15px;
+            }
+        }
+        
+        /* 主题切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 深色模式样式 */
+        .dark-mode {
+            background-color: #1a1a2e;
+            color: #e6e6e6;
+        }
+        
+        .dark-mode .nav-card {
+            background-color: #16213e;
+            color: #e6e6e6;
+            border-color: #0f3460;
+        }
+        
+        .dark-mode .main-link {
+            background-color: #16213e;
+            color: #6a11cb;
+            border-color: #0f3460;
+        }
+        
+        .dark-mode .nav-desc {
+            color: #b0b0b0;
+        }
+        
+        .dark-mode footer {
+            border-top-color: #0f3460;
+            color: #b0b0b0;
+            background-color: #1a1a2e;
+        }
+        
+        .dark-mode .tagline {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+        }
+        
+        .dark-mode .category-title {
+            color: #e6e6e6;
+        }
+        
+        .dark-mode .category-group {
+            border-bottom-color: #0f3460;
+        }
+        
+        .dark-mode .category-title:before, 
+        .dark-mode .category-title:after {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+        }
+        
+        .dark-mode .search-title {
+            color: #e6e6e6;
+        }
+        
+        .dark-mode .search-box {
+            background-color: #16213e;
+            border-color: #0f3460;
+        }
+        
+        .dark-mode .search-input {
+            background-color: #16213e;
+            color: #e6e6e6;
+        }
+        
+        .dark-mode .search-hint {
+            color: #b0b0b0;
+        }
+
+/* 点击文字特效 */
+.click-text-effect {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1001;
+    opacity: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    white-space: nowrap;
+    animation: textFloat 1.5s ease-out forwards;
+    user-select: none;
+}
+
+.dark-mode .click-text-effect {
+    color: #e6e6e6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes textFloat {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -200%) scale(1.2);
+    }
+}
+
+    </style>
 </head>
 <body>
-    <div class="change" id="index_card">
-        <center><img class="change" id="favorite" style="width:160px;margin-top:-50px;" src="https://s11.ax1x.com/2024/01/05/pixwiWR.jpg"><br>
-        <b style="font-weight: 300;font-size:200%;">Home</b><br>
-        <b><span style="font-weight: 300;" class="text-muted text-xs block">
-        <div id="chakhsu"></div> 
-        <script> var chakhsu = function (r) {
-        function t() {
-            return b[Math.floor(Math.random() * b.length)]} 
-        function e() {
-            return String.fromCharCode(94 * Math.random() + 33)
-        } 
-        function n(r) {
-            for (var n = document.createDocumentFragment(), i = 0; r > i; i++) { 
-                var l = document.createElement("span"); 
-                l.textContent = e(), l.style.color = t(), n.appendChild(l) 
-        } 
-        return n
-        }
-        function i() {
-            var t = o[c.skillI]; 
-            c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? 
-            (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ?                 c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? 
-        c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? 
-        (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? 
-        Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d) 
-        }  
-        var l = "", o = ["简单、轻快、美观" ].map(function (r) {return r + ""}), a = 2, g = 1, s = 5, d = 75, b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"], c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g}; 
-        i() }; 
-    chakhsu(document.getElementById('chakhsu')); 
-    </script>
-
-<p class="change" id="icons"><i style="color:#fffffc;zoom:100%;" class="iconfont icongitee"><a href="https://gitee.com/sshd" target="_blank"><img src="source\img\favicon.ico" alt="未加载"  width="30px" height="30px"/></a></i>
-
-        <p class="change" id="icons"><i style="color:#fffffc;zoom:100%;" class="iconfont icongitee">唯有你也喜欢，生活才有意义</i>
-        </p>
-        <div class="buttones">
-            <a href="index.html" rel="noopener">
-                <button class="button_1">
-                    <b style="font-size:20px;font-weight: 300;"><b>主页</b></b><br>
-                </button>
-            </a>
-            <a href="https://www.bidianer.com/sshd" target="_blank" rel="noopener">
-                <button class="button_1">
-                    <b style="font-size:20px;font-weight: 300;"><b>导航</b></b><br>
-                </button>
-            </a>
-            <a href="https://sshd.mysxl.cn/" target="_blank" rel="noopener">
-                <button class="button_1">
-                    <b style="font-size:20px;font-weight: 300;"><b>博客</b></b><br>
-                </button>
-            </a>
-            <a href="https://v.qq.com/" target="_blank" rel="noopener">
-                <button class="button_1">
-                    <b style="font-size:20px;font-weight: 300;"><b>视频</b></b><br>
-                </button>
-            </a>
-            <a href="https://y.qq.com/" target="_blank rel="noopener">
-                <button class="button_1">
-                    <b style="font-size:20px;font-weight: 300;"><b>音乐</b></b><br>
-                </button>
-            </a>
-            <a href="https://www.xinpianchang.com/" target="_blank" rel="noopener">
-                <button class="button_1">
-                    <b style="font-size:20px;font-weight: 300;"><b>片场</b></b><br>
-                </button>
-            </a>
-        </div>
-        </center>
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
     </div>
+    <div class="container">
+        <header>
+            <div class="avatar-container">
+                <div class="avatar">
+                    <div class="rabbit-avatar">
+                        <div class="rabbit-ear left"></div>
+                        <div class="rabbit-ear right"></div>
+                        <div class="rabbit-face">
+                            <div class="rabbit-eye left"></div>
+                            <div class="rabbit-eye right"></div>
+                            <div class="rabbit-nose"></div>
+                            <div class="rabbit-mouth"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1>小鱼导航</h1>
+            <p class="subtitle" id="subtitle">一个链接，聚合、分享你的所有信息</p>
+        </header>
+        
+        <!-- 百度搜索框 -->
+        <div class="search-container">
+            <form id="baiduSearchForm" action="https://www.baidu.com/s" method="get" target="_blank" class="search-box">
+                <input type="text" name="wd" placeholder="请输入搜索关键词..." class="search-input" id="searchInput" autocomplete="off">
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i> 搜索
+                </button>
+            </form>
+            <div class="search-hint">
+                <i class="fas fa-lightbulb"></i> 直接输入关键词，按回车进行搜索
+            </div>
+        </div>
+        
+        <!-- 常用分类 -->
+        <div class="category-group">
+            <h2 class="category-title">常用</h2>
+            <div class="nav-grid">
+                <a href="https://sshd.mysxl.cn/" class="nav-card" target="_blank">
+                    <div class="category-tag category-tech">常用</div>
+                    <div class="nav-icon github">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <div class="nav-title">博客</div>
+                    <div class="nav-desc">个人博客</div>
+                </a>
+                
+                <a href="https://yun.vivo.com.cn/" class="nav-card" target="_blank">
+                    <div class="category-tag category-tech">常用</div>
+                    <div class="nav-icon github">
+                        <i class="fa-solid fa-comment"></i>
+                    </div>
+                    <div class="nav-title">维沃云服务</div>
+                    <div class="nav-desc">手机云服务</div>
+                </a>
+                <a href="https://cloud.hihonor.com/" class="nav-card" target="_blank">
+                    <div class="category-tag category-tech">常用</div>
+                    <div class="nav-icon github">
+                        <i class="fa-solid fa-cloud-arrow-down"></i>
+                    </div>
+                    <div class="nav-title">荣耀云服务</div>
+                    <div class="nav-desc">手机云服务</div>
+                </a>
+                
+                <a href="https://gitee.com/sshd/xiaoyu" class="nav-card" target="_blank">
+                    <div class="category-tag category-tech">常用</div>
+                    <div class="nav-icon github">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <div class="nav-title">小鱼开源</div>
+                    <div class="nav-desc">代码仓库</div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- 影视分类 -->
+        <div class="category-group">
+            <h2 class="category-title">影视</h2>
+            <div class="nav-grid">
+                <a href="https://tv.baozangdh.com/" class="nav-card" target="_blank">
+                    <div class="category-tag category-tool">影视</div>
+                    <div class="nav-icon tools">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="nav-title">影视宝藏</div>
+                    <div class="nav-desc">免费影视导航</div>
+                </a>
+                
+                <a href="https://www.klyingshi.top/" class="nav-card" target="_blank">
+                    <div class="category-tag category-tool">影视</div>
+                    <div class="nav-icon tools">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="nav-title">可乐影视</div>
+                    <div class="nav-desc">免费影视导航</div>
+                </a>
+                
+                <a href="https://yinghezhinan.com/" class="nav-card" target="_blank">
+                    <div class="category-tag category-tool">影视</div>
+                    <div class="nav-icon tools">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="nav-title">硬核影视</div>
+                    <div class="nav-desc">免费影视导航</div>
+                </a>
+                
+                <a href="https://faxianx.com/" class="nav-card" target="_blank">
+                    <div class="category-tag category-tool">影视</div>
+                    <div class="nav-icon tools">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="nav-title">发现之门</div>
+                    <div class="nav-desc">免费影视导航</div>
+                </a>
 
-    <footer id="footer">
-        <script type="text/javascript" src="source/js/footer.js"></script>
+
+
+
+                <a href="https://kimivod.com/" class="nav-card" target="_blank">
+                    <div class="category-tag category-lvse">在线</div>
+                    <div class="nav-icon sunflower">
+                        <i class="fa-brands fa-sketch"></i>
+                    </div>
+                    <div class="nav-title">kimivod</div>
+                    <div class="nav-desc">在线影视</div>
+                </a>
+                
+                <a href="https://hellociqryx6e.com/" class="nav-card" target="_blank">
+                    <div class="category-tag category-lvse">在线</div>
+                    <div class="nav-icon sunflower">
+                        <i class="fa-brands fa-sketch"></i>
+                    </div>
+                    <div class="nav-title">极光影视</div>
+                    <div class="nav-desc">在线影视</div>
+                </a>
+                
+                <a href="https://www.freeokk.me/" class="nav-card" target="_blank">
+                    <div class="category-tag category-lvse">在线</div>
+                    <div class="nav-icon sunflower">
+                        <i class="fa-brands fa-sketch"></i>
+                    </div>
+                    <div class="nav-title">freeok</div>
+                    <div class="nav-desc">在线影视</div>
+                </a>
+                
+                <a href="https://gaze.run/" class="nav-card" target="_blank">
+                    <div class="category-tag category-lvse">在线</div>
+                    <div class="nav-icon sunflower">
+                        <i class="fa-brands fa-sketch"></i>
+                    </div>
+                    <div class="nav-title">注视影视</div>
+                    <div class="nav-desc">在线影视</div>
+                </a>
+
+            </div>
+        </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2026 罗小鱼 · 个人导航页 | 常用链接，一网打尽</p>
+        </div>
     </footer>
 
+    <script>
+    // 点击特效 - 修改版本
+    document.addEventListener('click', function(e) {
+        // 创建点击效果元素
+        const effect = document.createElement('div');
+        effect.className = 'click-effect';
+        
+        // 随机颜色
+        const colors = ['#6a11cb', '#2575fc', '#ff9a00', '#FF9A9E', '#84FAB0'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // 设置位置和颜色
+        effect.style.left = e.clientX + 'px';
+        effect.style.top = e.clientY + 'px';
+        effect.style.backgroundColor = color;
+        
+        // 添加到页面
+        document.body.appendChild(effect);
+        
+        // 动画结束后移除元素
+        setTimeout(() => {
+            effect.remove();
+        }, 1000);
+        
+        // 创建文字效果元素
+        const textEffect = document.createElement('div');
+        textEffect.className = 'click-text-effect';
+        
+        // 社会主义核心价值观词汇
+        const texts = ['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '友善'];
+        const text = texts[Math.floor(Math.random() * texts.length)];
+        
+        // 设置文字和位置
+        textEffect.textContent = text;
+        textEffect.style.left = e.clientX + 'px';
+        textEffect.style.top = e.clientY + 'px';
+        
+        // 添加到页面
+        document.body.appendChild(textEffect);
+        
+        // 文字动画结束后移除元素
+        setTimeout(() => {
+            textEffect.remove();
+        }, 1500);
+    });
+    
+    // 主题切换
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        const icon = this.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+            icon.className = 'fas fa-sun';
+            this.title = '切换到浅色模式';
+        } else {
+            icon.className = 'fas fa-moon';
+            this.title = '切换到深色模式';
+        }
+    });
+    
+    // 动态问候语
+    const greetings = [
+        "欢迎来到我的导航页",
+        "高效生活，从这里开始",
+        "聚合所有常用链接",
+        "一个链接，访问所有",
+        "让网络生活更便捷",
+        "常用链接，一网打尽",
+        "你的个性化导航中心",
+        "探索更多可能"
+    ];
+    
+    let currentGreetingIndex = 0;
+    const subtitle = document.getElementById('subtitle');
+    
+    // 初始设置
+    subtitle.textContent = greetings[currentGreetingIndex];
+    
+    // 每5秒切换一次问候语
+    setInterval(() => {
+        currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+        subtitle.textContent = greetings[currentGreetingIndex];
+    }, 5000);
+    
+    // 导航卡片点击统计
+    document.querySelectorAll('.nav-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const title = this.querySelector('.nav-title').textContent;
+            const category = this.querySelector('.category-tag').textContent;
+            console.log(`导航卡片被点击: ${title} (${category})`);
+        });
+    });
+    
+    // 百度搜索表单处理 - 修复了提交问题
+    const searchForm = document.getElementById('baiduSearchForm');
+    const searchInput = document.getElementById('searchInput');
+    
+    searchForm.addEventListener('submit', function(e) {
+        // 移除之前的验证代码，让表单正常提交
+        if (!searchInput.value.trim()) {
+            e.preventDefault();
+            searchInput.focus();
+            searchInput.style.boxShadow = '0 0 0 2px rgba(255, 0, 0, 0.2)';
+            setTimeout(() => {
+                searchInput.style.boxShadow = 'none';
+            }, 1000);
+            return false;
+        }
+        // 如果有搜索词，让表单正常提交到百度
+    });
+    
+    // 搜索框焦点效果
+    searchInput.addEventListener('focus', function() {
+        this.parentElement.style.boxShadow = '0 12px 30px rgba(76, 175, 80, 0.2)';
+    });
+    
+    searchInput.addEventListener('blur', function() {
+        this.parentElement.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+    });
+    
+    // 页面加载动画
+    window.addEventListener('load', function() {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+        
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+        }, 100);
+        
+        // 搜索框显示效果
+        const searchContainer = document.querySelector('.search-container');
+        searchContainer.style.opacity = '0';
+        searchContainer.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            searchContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            searchContainer.style.opacity = '1';
+            searchContainer.style.transform = 'translateY(0)';
+        }, 200);
+        
+        // 卡片逐个显示效果
+        const cards = document.querySelectorAll('.nav-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 300 + index * 50);
+        });
+        
+        // 分类组逐个显示效果
+        const groups = document.querySelectorAll('.category-group');
+        groups.forEach((group, index) => {
+            group.style.opacity = '0';
+            group.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                group.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                group.style.opacity = '1';
+                group.style.transform = 'translateY(0)';
+            }, 500 + index * 100);
+        });
+    });
+    
+    // 搜索框快捷键：按ESC清空搜索框，按/聚焦搜索框
+    document.addEventListener('keydown', function(e) {
+        if (e.target !== searchInput) {
+            if (e.key === '/' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        } else if (e.key === 'Escape') {
+            searchInput.value = '';
+            searchInput.blur();
+        }
+    });
+</script>
 </body>
-
 </html>
