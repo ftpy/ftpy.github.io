@@ -31,6 +31,70 @@
             align-items: center;
         }
         
+        /* 游动的鱼动画背景 */
+        .fish-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .fish {
+            position: absolute;
+            font-size: 48px;
+            color: rgba(106, 17, 203, 0.9);
+            animation: swim 20s linear infinite;
+            opacity: 0.1; /* 提高透明度 */
+            filter: none; /* 完全移除模糊 */
+        }
+        
+        /* 不同类型的鱼样式 */
+        .fish-small {
+            font-size: 24px;
+            opacity: 0.5;
+            animation-duration: 15s;
+        }
+        
+        .fish-medium {
+            font-size: 32px;
+            opacity: 0.6;
+            animation-duration: 25s;
+        }
+        
+        .fish-large {
+            font-size: 64px;
+            opacity: 0.4;
+            animation-duration: 30s;
+        }
+        
+        .fish-fast {
+            animation-duration: 10s;
+            opacity: 0.8;
+        }
+        
+        .fish-slow {
+            animation-duration: 40s;
+            opacity: 0.3;
+        }
+        
+        .fish-reverse {
+            animation-direction: reverse;
+            animation-delay: 0s;
+        }
+        
+        @keyframes swim {
+            0% {
+                transform: translateX(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) rotate(360deg);
+            }
+        }
+        
         /* 点击特效 */
         .click-effect {
             position: absolute;
@@ -59,7 +123,6 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 30px 20px 20px;
-            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -69,164 +132,35 @@
             text-align: center;
             margin-bottom: 10px;
             width: 100%;
-        }
-        
-        .avatar-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 25px;
-        }
-        
-        /* 修改头像容器，移除溢出隐藏 */
-        .avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff6b8b 0%, #ff9a00 100%); /* 改为粉色到橙色的渐变 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0;
-            box-shadow: 0 10px 25px rgba(255, 107, 139, 0.3); /* 调整阴影颜色 */
-            position: relative;
-            /* 移除 overflow: hidden; 让耳朵可以显示出来 */
-            border: 5px solid white;
-            animation: pulse 2s infinite alternate;
-        }
-        
-        /* 兔子头像样式 - 确保正确显示 */
-        .rabbit-avatar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        
-        /* 修改兔子耳朵样式，使它们更明显 */
-        .rabbit-ear {
-            position: absolute;
-            top: -15px; /* 调整位置，确保耳朵根部在头像内 */
-            width: 35px;
-            height: 55px; /* 缩短耳朵长度 */
-            background-color: #ff9a00; /* 橙色耳朵 */
-            border-radius: 50% 50% 0 0;
-            animation: earMove 2s infinite alternate;
-            z-index: 1;
-            border: 3px solid white; /* 添加白色边框，使耳朵更明显 */
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* 添加阴影增加立体感 */
-        }
-        
-        .rabbit-ear.left {
-            left: 35px; /* 调整位置，确保根部在头像内 */
-            transform: rotate(-10deg);
-        }
-        
-        .rabbit-ear.right {
-            right: 35px; /* 调整位置，确保根部在头像内 */
-            transform: rotate(10deg);
-        }
-        
-        /* 修改兔子脸部样式 */
-        .rabbit-face {
-            width: 110px;
-            height: 110px;
-            background-color: white; /* 白色脸部 */
-            border-radius: 50%;
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid #ffd9e3; /* 添加浅粉色边框 */
-        }
-        
-        /* 修改兔子眼睛，使其更明显 */
-        .rabbit-eye {
-            position: absolute;
-            top: 35px;
-            width: 18px;
-            height: 25px; /* 调整高度，使眼睛更椭圆 */
-            background-color: #333; /* 深色眼睛 */
-            border-radius: 50%;
-            animation: blink 4s infinite;
-            border: 2px solid white; /* 白色边框使眼睛更清晰 */
-        }
-        
-        .rabbit-eye.left {
-            left: 25px;
-        }
-        
-        .rabbit-eye.right {
-            right: 25px;
-        }
-        
-        /* 修改兔子鼻子 */
-        .rabbit-nose {
-            position: absolute;
-            top: 65px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 15px;
-            background-color: #ff6b8b; /* 粉色鼻子 */
-            border-radius: 50%;
-            z-index: 3;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* 修改兔子嘴巴 */
-        .rabbit-mouth {
-            position: absolute;
-            top: 75px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 35px;
-            height: 20px;
-            border-bottom: 4px solid #ff6b8b; /* 粉色嘴巴 */
-            border-radius: 0 0 30px 30px;
-        }
-        
-        /* 兔子动画 */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-        }
-        
-        @keyframes earMove {
-            0% { transform: rotate(-10deg); }
-            50% { transform: rotate(0deg); }
-            100% { transform: rotate(-10deg); }
-        }
-        
-        @keyframes blink {
-            0%, 96%, 100% { height: 25px; }
-            97%, 99% { height: 5px; }
+            padding-top: 40px;
         }
         
         h1 {
-            font-size: 32px;
+            font-size: 42px;
             color: #2c3e50;
             margin-bottom: 10px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
         
         .subtitle {
             color: #7f8c8d;
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 25px;
             min-height: 30px;
         }
         
         .tagline {
             display: inline-block;
-            padding: 8px 15px;
+            padding: 10px 20px;
             background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             color: white;
-            border-radius: 20px;
-            font-size: 14px;
+            border-radius: 25px;
+            font-size: 16px;
             margin-bottom: 30px;
             box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
         }
@@ -287,6 +221,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            border-radius: 0 50px 50px 0;
         }
         
         .search-button:hover {
@@ -365,7 +300,8 @@
         
         .category-group:last-child {
             border-bottom: none;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            padding-bottom: 0;
         }
         
         .category-title {
@@ -412,20 +348,13 @@
         }
         
         .category-tech { background-color: #3498db; }
-        .category-device { background-color: #2ecc71; }
         .category-tool { background-color: #e74c3c; }
         .category-lvse { background-color: #3ce73c; }
-        .category-entertainment { background-color: #9b59b6; }
-        .category-shopping { background-color: #f39c12; }
-        .category-social { background-color: #1abc9c; }
-        .category-education { background-color: #34495e; }
-        .category-travel { background-color: #e67e22; }
-        .category-search { background-color: #27ae60; }
         
         /* 卡片网格 - 固定宽度布局 */
         .nav-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 默认每行4个卡片 */
+            grid-template-columns: repeat(4, 1fr);
             gap: 25px;
             width: 100%;
             max-width: 1200px;
@@ -449,7 +378,7 @@
             border: 1px solid #f0f0f0;
             position: relative;
             overflow: hidden;
-            height: 220px; /* 固定高度 */
+            height: 220px;
             min-height: 220px;
         }
         
@@ -510,43 +439,88 @@
         }
         
         /* 不同图标的背景色 */
-        .blog { background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%); }
+        .github { background: linear-gradient(135deg, #333 0%, #6e5494 100%); }
         .vivo { background: linear-gradient(135deg, #A3BFFA 0%, #6991C7 100%); }
         .honor { background: linear-gradient(135deg, #FFECD2 0%, #FCB69F 100%); }
         .sunflower { background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); }
         .search { background: linear-gradient(135deg, #D4FC79 0%, #96E6A1 100%); }
-        .miit { background: linear-gradient(135deg, #FCCF31 0%, #F55555 100%); }
-        .github { background: linear-gradient(135deg, #333 0%, #6e5494 100%); }
-        .music { background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%); }
-        .cloud { background: linear-gradient(135deg, #89F7FE 0%, #66A6FF 100%); }
-        .video { background: linear-gradient(135deg, #FF5858 0%, #F09819 100%); }
-        .shopping { background: linear-gradient(135deg, #FFD26F 0%, #3677FF 100%); }
-        .social { background: linear-gradient(135deg, #A8FF78 0%, #78FFD6 100%); }
         .tools { background: linear-gradient(135deg, #FFAFBD 0%, #ffc3a0 100%); }
-        .education { background: linear-gradient(135deg, #FFD89B 0%, #19547B 100%); }
-        .travel { background: linear-gradient(135deg, #FFECD2 0%, #FCB69F 100%); }
         
-        footer {
-            text-align: center;
-            color: #95a5a6;
-            font-size: 14px;
-            padding: 20px 0;
-            border-top: 1px solid #ecf0f1;
-            width: 100%;
-            background-color: #f5f7fa;
-            margin-top: 40px;
-        }
+footer {
+    text-align: center;
+    color: #95a5a6;
+    font-size: 14px;
+    padding: 25px 0;
+    width: 100%;
+    max-width: 100%;
+    background-color: #f5f7fa;
+    margin: 40px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 垂直居中内容 */
+}
         
         .footer-content {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 25px 30px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
         }
         
-        /* 响应式设计 - 控制每行显示卡片数量 */
+        .footer-content p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .footer-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 点击文字特效 */
+        .click-text-effect {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1001;
+            opacity: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+            animation: textFloat 1.5s ease-out forwards;
+            user-select: none;
+        }
+        
+        .dark-mode .click-text-effect {
+            color: #e6e6e6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        
+        @keyframes textFloat {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -100%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -200%) scale(1.2);
+            }
+        }
+        
+        /* 响应式设计 */
         @media (max-width: 1200px) {
             .nav-grid {
-                grid-template-columns: repeat(3, 1fr); /* 每行3个卡片 */
+                grid-template-columns: repeat(3, 1fr);
                 max-width: 1000px;
             }
             
@@ -558,13 +532,24 @@
             .search-container {
                 max-width: 700px;
             }
+            
+            .footer-content {
+                max-width: 1000px;
+            }
         }
         
         @media (max-width: 992px) {
             .nav-grid {
-                grid-template-columns: repeat(2, 1fr); /* 每行2个卡片 */
+                grid-template-columns: repeat(2, 1fr);
                 max-width: 700px;
                 gap: 20px;
+            }
+            
+            .nav-card {
+                width: 100%;
+                min-width: 100%;
+                height: 200px;
+                min-height: 200px;
             }
             
             .category-title:before, .category-title:after {
@@ -580,32 +565,7 @@
             }
             
             h1 {
-                font-size: 26px;
-            }
-            
-            .avatar-container {
-                width: 130px;
-                height: 130px;
-            }
-            
-            /* 调整响应式设计中的兔子样式 */
-            .rabbit-ear {
-                top: -10px;
-                width: 30px;
-                height: 45px;
-            }
-            
-            .rabbit-ear.left {
-                left: 30px;
-            }
-            
-            .rabbit-ear.right {
-                right: 30px;
-            }
-            
-            .rabbit-face {
-                width: 100px;
-                height: 100px;
+                font-size: 36px;
             }
             
             .category-tag {
@@ -640,13 +600,27 @@
             .search-button {
                 padding: 0 25px;
             }
+            
+            .footer-content {
+                max-width: 700px;
+                padding: 20px 0px;
+            }
         }
         
         @media (max-width: 768px) {
             .nav-grid {
-                grid-template-columns: 1fr; /* 每行1个卡片 */
-                max-width: 400px;
+                grid-template-columns: 1fr;
+                max-width: 500px;
                 gap: 15px;
+            }
+            
+            .nav-card {
+                width: 100%;
+                min-width: 100%;
+                height: 190px;
+                min-height: 190px;
+                max-width: 500px;
+                margin: 0 auto;
             }
             
             body {
@@ -666,11 +640,6 @@
                 display: none;
             }
             
-            .avatar-container {
-                width: 110px;
-                height: 110px;
-            }
-            
             .nav-card {
                 height: 190px;
                 min-height: 190px;
@@ -683,40 +652,6 @@
             
             .nav-desc {
                 font-size: 13px;
-            }
-            
-            /* 调整小屏幕下的兔子样式 */
-            .rabbit-ear {
-                top: -8px;
-                width: 25px;
-                height: 35px;
-            }
-            
-            .rabbit-ear.left {
-                left: 25px;
-            }
-            
-            .rabbit-ear.right {
-                right: 25px;
-            }
-            
-            .rabbit-face {
-                width: 90px;
-                height: 90px;
-            }
-            
-            .rabbit-eye {
-                top: 20px;
-                width: 15px;
-                height: 20px;
-            }
-            
-            .rabbit-nose {
-                top: 55px;
-            }
-            
-            .rabbit-mouth {
-                top: 60px;
             }
             
             .search-container {
@@ -741,10 +676,50 @@
             .search-button {
                 padding: 15px;
                 width: 100%;
+                border-radius: 0 0 20px 20px;
             }
             
             .search-button:hover {
                 padding: 15px;
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .footer-content {
+                max-width: 100%;
+                padding: 18px 20px;
+                margin: 0 0px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .tagline {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-grid {
+                max-width: 400px;
+            }
+            
+            .nav-card {
+                max-width: 400px;
+            }
+            
+            .footer-content {
+                max-width: 400px;
+                margin: 0 10px;
+            }
+            
+            h1 {
+                font-size: 28px;
             }
         }
         
@@ -795,9 +770,13 @@
         }
         
         .dark-mode footer {
-            border-top-color: #0f3460;
-            color: #b0b0b0;
             background-color: #1a1a2e;
+        }
+        
+        .dark-mode .footer-content {
+            background-color: #16213e;
+            color: #e6e6e6;
+            border-color: #0f3460;
         }
         
         .dark-mode .tagline {
@@ -834,64 +813,24 @@
         .dark-mode .search-hint {
             color: #b0b0b0;
         }
-
-/* 点击文字特效 */
-.click-text-effect {
-    position: absolute;
-    pointer-events: none;
-    z-index: 1001;
-    opacity: 0;
-    font-size: 16px;
-    font-weight: bold;
-    color: #2c3e50;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-    white-space: nowrap;
-    animation: textFloat 1.5s ease-out forwards;
-    user-select: none;
-}
-
-.dark-mode .click-text-effect {
-    color: #e6e6e6;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-@keyframes textFloat {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
-    }
-    20% {
-        opacity: 1;
-        transform: translate(-50%, -100%) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -200%) scale(1.2);
-    }
-}
+        
+        .dark-mode .fish {
+            color: rgba(255, 255, 255, 0.1);
+        }
 
     </style>
 </head>
 <body>
+    <!-- 游动的鱼背景 -->
+    <div class="fish-background" id="fishBackground">
+        <!-- 鱼将在JavaScript中动态生成 -->
+    </div>
+    
     <div class="theme-toggle" id="themeToggle">
         <i class="fas fa-moon"></i>
     </div>
     <div class="container">
         <header>
-            <div class="avatar-container">
-                <div class="avatar">
-                    <div class="rabbit-avatar">
-                        <div class="rabbit-ear left"></div>
-                        <div class="rabbit-ear right"></div>
-                        <div class="rabbit-face">
-                            <div class="rabbit-eye left"></div>
-                            <div class="rabbit-eye right"></div>
-                            <div class="rabbit-nose"></div>
-                            <div class="rabbit-mouth"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <h1>小鱼导航</h1>
             <p class="subtitle" id="subtitle">一个链接，聚合、分享你的所有信息</p>
         </header>
@@ -990,9 +929,6 @@
                     <div class="nav-desc">免费影视导航</div>
                 </a>
 
-
-
-
                 <a href="https://kimivod.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-lvse">在线</div>
                     <div class="nav-icon sunflower">
@@ -1032,7 +968,7 @@
             </div>
         </div>
 
-<!-- 下载分类 -->
+        <!-- 下载分类 -->
         <div class="category-group">
             <h2 class="category-title">下载</h2>
             <div class="nav-grid">
@@ -1076,134 +1012,89 @@
         </div>
     
     <footer>
-        <div class="footer-content">
+        <div>
             <p>向海风许愿，在山海相见</p>
             <p>© 2026 罗小鱼 · 个人导航 | 影视导航</p>
         </div>
     </footer>
+</div>
 
     <script>
-    // 点击特效 - 修改版本
-    document.addEventListener('click', function(e) {
-        // 创建点击效果元素
-        const effect = document.createElement('div');
-        effect.className = 'click-effect';
+    // 游动的鱼背景初始化
+    function initFishBackground() {
+        const fishContainer = document.getElementById('fishBackground');
+        const fishTypes = ['🐠', '🐟', '🐡', '🐬', '🐳', '🦈', '🐋', '🦑', '🐙', '🦐',  '🦀', '🦞', '🦪', '🐌', '🐢', '🦦', '🐊', '🦩', '🐸'];
+        const fishClasses = ['fish-small', 'fish-medium', 'fish-large', 'fish-fast', 'fish-slow', 'fish-reverse'];
+        const fishColors = [
+         'rgba(106, 17, 203, 0.80)',    // 主色，提高透明度
+        'rgba(37, 117, 252, 0.80)',    // 蓝色，提高透明度
+        'rgba(255, 87, 34, 0.80)',     // 更亮的橙色
+        'rgba(255, 64, 129, 0.80)',    // 更亮的粉色
+        'rgba(76, 175, 80, 0.80)',     // 绿色，提高透明度
+        'rgba(156, 39, 176, 0.80)',    // 紫色，提高透明度
+        'rgba(3, 169, 244, 0.80)',     // 更亮的蓝色
+        'rgba(233, 30, 99, 0.80)'      // 亮粉色，提高透明度
+        ];
         
-        // 随机颜色
-        const colors = ['#6a11cb', '#2575fc', '#ff9a00', '#FF9A9E', '#84FAB0'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        
-        // 设置位置和颜色
-        effect.style.left = e.clientX + 'px';
-        effect.style.top = e.clientY + 'px';
-        effect.style.backgroundColor = color;
-        
-        // 添加到页面
-        document.body.appendChild(effect);
-        
-        // 动画结束后移除元素
-        setTimeout(() => {
-            effect.remove();
-        }, 1000);
-        
-        // 创建文字效果元素
-        const textEffect = document.createElement('div');
-        textEffect.className = 'click-text-effect';
-        
-        // 社会主义核心价值观词汇
-        const texts = ['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '友善'];
-        const text = texts[Math.floor(Math.random() * texts.length)];
-        
-        // 设置文字和位置
-        textEffect.textContent = text;
-        textEffect.style.left = e.clientX + 'px';
-        textEffect.style.top = e.clientY + 'px';
-        
-        // 添加到页面
-        document.body.appendChild(textEffect);
-        
-        // 文字动画结束后移除元素
-        setTimeout(() => {
-            textEffect.remove();
-        }, 1500);
-    });
-    
-    // 主题切换
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-        const icon = this.querySelector('i');
-        if (document.body.classList.contains('dark-mode')) {
-            icon.className = 'fas fa-sun';
-            this.title = '切换到浅色模式';
-        } else {
-            icon.className = 'fas fa-moon';
-            this.title = '切换到深色模式';
+        // 创建20条鱼
+        for (let i = 0; i < 20; i++) {
+            const fish = document.createElement('div');
+            fish.className = 'fish';
+            
+            const fishType = fishTypes[Math.floor(Math.random() * fishTypes.length)];
+            fish.innerHTML = fishType;
+            
+            fish.style.top = `${Math.random() * 180}px`;
+            fish.style.left = `${Math.random() * 100}px`;
+            
+            fish.style.animationDelay = `-${Math.random() * 30}s`;
+            fish.style.animationDuration = `${10 + Math.random() * 30}s`;
+            
+            const size = 20 + Math.random() * 50;
+            fish.style.fontSize = `${size}px`;
+            
+            fish.style.opacity = `${0.2 + Math.random() * 0.6}`;
+            fish.style.color = fishColors[Math.floor(Math.random() * fishColors.length)];
+            
+            const extraClass = fishClasses[Math.floor(Math.random() * fishClasses.length)];
+            fish.classList.add(extraClass);
+            
+            fish.style.filter = `blur(${Math.random() * 1.5}px)`;
+            fish.style.transform = `rotate(${Math.random() * 360}deg)`;
+            
+            fishContainer.appendChild(fish);
         }
-    });
-    
-    // 动态问候语
-    const greetings = [
-        "欢迎来到我的导航页",
-        "高效生活，从这里开始",
-        "聚合所有常用链接",
-        "一个链接，访问所有",
-        "让网络生活更便捷",
-        "常用链接，一网打尽",
-        "你的个性化导航中心",
-        "探索更多可能"
-    ];
-    
-    let currentGreetingIndex = 0;
-    const subtitle = document.getElementById('subtitle');
-    
-    // 初始设置
-    subtitle.textContent = greetings[currentGreetingIndex];
-    
-    // 每5秒切换一次问候语
-    setInterval(() => {
-        currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
-        subtitle.textContent = greetings[currentGreetingIndex];
-    }, 5000);
-    
-    // 导航卡片点击统计
-    document.querySelectorAll('.nav-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const title = this.querySelector('.nav-title').textContent;
-            const category = this.querySelector('.category-tag').textContent;
-            console.log(`导航卡片被点击: ${title} (${category})`);
-        });
-    });
-    
-    // 百度搜索表单处理 - 修复了提交问题
-    const searchForm = document.getElementById('baiduSearchForm');
-    const searchInput = document.getElementById('searchInput');
-    
-    searchForm.addEventListener('submit', function(e) {
-        // 移除之前的验证代码，让表单正常提交
-        if (!searchInput.value.trim()) {
-            e.preventDefault();
-            searchInput.focus();
-            searchInput.style.boxShadow = '0 0 0 2px rgba(255, 0, 0, 0.2)';
-            setTimeout(() => {
-                searchInput.style.boxShadow = 'none';
-            }, 1000);
-            return false;
+        
+        // 添加一些反向游动的鱼
+        for (let i = 0; i < 10; i++) {
+            const fish = document.createElement('div');
+            fish.className = 'fish fish-reverse';
+            
+            const fishType = fishTypes[Math.floor(Math.random() * fishTypes.length)];
+            fish.innerHTML = fishType;
+            
+            fish.style.top = `${Math.random() * 180}px`;
+            fish.style.left = `${Math.random() * 100 + 50}px`;
+            
+            fish.style.animationDelay = `-${Math.random() * 30}s`;
+            fish.style.animationDuration = `${15 + Math.random() * 25}s`;
+            
+            const size = 15 + Math.random() * 30;
+            fish.style.fontSize = `${size}px`;
+            
+            fish.style.opacity = `${0.1 + Math.random() * 0.4}`;
+            fish.style.color = fishColors[Math.floor(Math.random() * fishColors.length)];
+            fish.style.filter = `blur(${Math.random() * 1}px)`;
+            
+            fishContainer.appendChild(fish);
         }
-        // 如果有搜索词，让表单正常提交到百度
-    });
+    }
     
-    // 搜索框焦点效果
-    searchInput.addEventListener('focus', function() {
-        this.parentElement.style.boxShadow = '0 12px 30px rgba(76, 175, 80, 0.2)';
-    });
-    
-    searchInput.addEventListener('blur', function() {
-        this.parentElement.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
-    });
-    
-    // 页面加载动画
+    // 页面加载完成后初始化
     window.addEventListener('load', function() {
+        initFishBackground();
+        
+        // 页面加载动画
         document.body.style.opacity = '0';
         document.body.style.transition = 'opacity 0.5s ease';
         
@@ -1247,9 +1138,127 @@
                 group.style.transform = 'translateY(0)';
             }, 500 + index * 100);
         });
+        
+        // 底部显示效果
+        const footerContent = document.querySelector('.footer-content');
+        footerContent.style.opacity = '0';
+        footerContent.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            footerContent.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            footerContent.style.opacity = '1';
+            footerContent.style.transform = 'translateY(0)';
+        }, 800);
     });
     
-    // 搜索框快捷键：按ESC清空搜索框，按/聚焦搜索框
+    // 点击特效
+    document.addEventListener('click', function(e) {
+        // 创建点击效果元素
+        const effect = document.createElement('div');
+        effect.className = 'click-effect';
+        
+        const colors = ['#6a11cb', '#2575fc', '#ff9a00', '#FF9A9E', '#84FAB0'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        effect.style.left = e.clientX + 'px';
+        effect.style.top = e.clientY + 'px';
+        effect.style.backgroundColor = color;
+        
+        document.body.appendChild(effect);
+        
+        setTimeout(() => {
+            effect.remove();
+        }, 1000);
+        
+        // 创建文字效果元素
+        const textEffect = document.createElement('div');
+        textEffect.className = 'click-text-effect';
+        
+        const texts = ['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '友善'];
+        const text = texts[Math.floor(Math.random() * texts.length)];
+        
+        textEffect.textContent = text;
+        textEffect.style.left = e.clientX + 'px';
+        textEffect.style.top = e.clientY + 'px';
+        
+        document.body.appendChild(textEffect);
+        
+        setTimeout(() => {
+            textEffect.remove();
+        }, 1500);
+    });
+    
+    // 主题切换
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        const icon = this.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+            icon.className = 'fas fa-sun';
+            this.title = '切换到浅色模式';
+        } else {
+            icon.className = 'fas fa-moon';
+            this.title = '切换到深色模式';
+        }
+    });
+    
+    // 动态问候语
+    const greetings = [
+        "欢迎来到我的导航页",
+        "高效生活，从这里开始",
+        "聚合所有常用链接",
+        "一个链接，访问所有",
+        "让网络生活更便捷",
+        "常用链接，一网打尽",
+        "你的个性化导航中心",
+        "探索更多可能"
+    ];
+    
+    let currentGreetingIndex = 0;
+    const subtitle = document.getElementById('subtitle');
+    
+    subtitle.textContent = greetings[currentGreetingIndex];
+    
+    setInterval(() => {
+        currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+        subtitle.textContent = greetings[currentGreetingIndex];
+    }, 5000);
+    
+    // 导航卡片点击统计
+    document.querySelectorAll('.nav-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const title = this.querySelector('.nav-title').textContent;
+            const category = this.querySelector('.category-tag').textContent;
+            console.log(`导航卡片被点击: ${title} (${category})`);
+        });
+    });
+    
+    // 百度搜索表单处理
+    const searchForm = document.getElementById('baiduSearchForm');
+    const searchInput = document.getElementById('searchInput');
+    
+    searchForm.addEventListener('submit', function(e) {
+        if (!searchInput.value.trim()) {
+            e.preventDefault();
+            searchInput.focus();
+            searchInput.style.boxShadow = '0 0 0 2px rgba(255, 0, 0, 0.2)';
+            setTimeout(() => {
+                searchInput.style.boxShadow = 'none';
+            }, 1000);
+            return false;
+        }
+    });
+    
+    // 搜索框焦点效果
+    searchInput.addEventListener('focus', function() {
+        this.parentElement.style.boxShadow = '0 12px 30px rgba(76, 175, 80, 0.2)';
+    });
+    
+    searchInput.addEventListener('blur', function() {
+        this.parentElement.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+    });
+    
+    // 搜索框快捷键
     document.addEventListener('keydown', function(e) {
         if (e.target !== searchInput) {
             if (e.key === '/' && !e.ctrlKey && !e.altKey && !e.metaKey) {
