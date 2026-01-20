@@ -45,35 +45,48 @@
         
         .fish {
             position: absolute;
-            font-size: 48px;
-            color: rgba(106, 17, 203, 0.9);
             animation: swim 20s linear infinite;
-            opacity: 0.1;
             filter: none;
+            will-change: transform;
         }
         
-        /* 不同类型的鱼样式 */
+        .fish img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            image-rendering: -webkit-optimize-contrast; /* 提高图片清晰度 */
+            image-rendering: crisp-edges;
+        }
+        
+        /* 不同类型的鱼样式 - 调整透明度让鱼更清晰 */
         .fish-small {
-            font-size: 24px;
-            opacity: 0.5;
+            width: 28px;
+            height: 28px;
+            opacity: 0.4;
             animation-duration: 15s;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
         }
         
         .fish-medium {
-            font-size: 32px;
-            opacity: 0.6;
+            width: 40px;
+            height: 40px;
+            opacity: 0.5;
             animation-duration: 25s;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
         }
         
         .fish-large {
-            font-size: 64px;
-            opacity: 0.4;
+            width: 70px;
+            height: 70px;
+            opacity: 0.35;
             animation-duration: 30s;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
         }
         
         .fish-fast {
             animation-duration: 10s;
-            opacity: 0.8;
+            opacity: 0.6;
         }
         
         .fish-slow {
@@ -84,6 +97,12 @@
         .fish-reverse {
             animation-direction: reverse;
             animation-delay: 0s;
+        }
+        
+        /* 特别清晰的大鱼 */
+        .fish-special {
+            opacity: 0.45;
+            filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.25)) brightness(1.1) contrast(1.1);
         }
         
         @keyframes swim {
@@ -156,10 +175,11 @@
             align-items: center;
             position: relative;
             z-index: 1;
-            background-color: rgba(245, 247, 250, 0.7); /* 添加半透明背景确保内容可读性 */
+            background-color: rgba(245, 247, 250, 0.85); /* 增加背景透明度确保内容可读性 */
             border-radius: 16px;
             margin-top: 20px;
             margin-bottom: 20px;
+            backdrop-filter: blur(2px); /* 轻微背景模糊 */
         }
         
         header {
@@ -179,13 +199,15 @@
             background-clip: text;
             font-weight: 800;
             letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加文字阴影提高可读性 */
         }
         
         .subtitle {
-            color: #7f8c8d;
+            color: #2c3e50;
             font-size: 20px;
             margin-bottom: 25px;
             min-height: 30px;
+            font-weight: 500;
         }
         
         .tagline {
@@ -270,7 +292,7 @@
         .search-hint {
             margin-top: 12px;
             font-size: 14px;
-            color: #7f8c8d;
+            color: #2c3e50;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -482,7 +504,7 @@
         
         footer {
             text-align: center;
-            color: #95a5a6;
+            color: #2c3e50;
             font-size: 14px;
             padding: 25px 0;
             width: 100%;
@@ -786,7 +808,7 @@
         }
         
         .dark-mode .container {
-            background-color: rgba(26, 26, 46, 0.85);
+            background-color: rgba(26, 26, 46, 0.9);
         }
         
         .dark-mode .nav-card {
@@ -854,7 +876,7 @@
         }
         
         .dark-mode .fish {
-            color: rgba(255, 255, 255, 0.1);
+            filter: brightness(1.2) contrast(1.2) opacity(0.5);
         }
 
     </style>
@@ -1059,51 +1081,155 @@
     </footer>
 
     <script>
-    // 游动的鱼背景初始化 - 全屏版本
+    // 游动的鱼背景初始化 - 优化清晰度
     function initFishBackground() {
         const fishContainer = document.getElementById('fishBackground');
-        const fishTypes = ['🐠', '🐟', '🐡', '🐬', '🐳', '🦈', '🐋', '🦑', '🐙', '🦐',  '🦀', '🦞', '🐌', '🐢', '🐊', '🐸'];
         const fishClasses = ['fish-small', 'fish-medium', 'fish-large', 'fish-fast', 'fish-slow', 'fish-reverse', 'fish-vertical', 'fish-diagonal'];
-        const fishColors = [
-            'rgba(106, 17, 203)',    // 主色
-            'rgba(37, 117, 252)',    // 蓝色
-            'rgba(255, 87, 34',     // 更亮的橙色
-            'rgba(255, 64, 129)',    // 更亮的粉色
-            'rgba(76, 175, 80)',     // 绿色
-            'rgba(156, 39, 176)',    // 紫色
-            'rgba(3, 169, 244)',     // 更亮的蓝色
-            'rgba(233, 30, 99)'      // 亮粉色
+        
+        // 8种不同颜色的鱼类图标
+        const fishTypes = [
+            'https://img.icons8.com/color/96/000000/fish.png', // 橙色鱼
+            'https://img.icons8.com/color/96/000000/clown-fish.png', // 小丑鱼
+            'https://img.icons8.com/color/96/000000/koi-fish.png', // 鲤鱼
+            'https://img.icons8.com/color/96/000000/dolphin.png', // 海豚
+            'https://img.icons8.com/color/96/000000/whale.png' // 鲸鱼
         ];
         
-        // 创建120条鱼（全屏需要更多鱼）
-        for (let i = 0; i < 120; i++) {
+        const fishColors = [
+            '#6a11cb',    // 紫色
+            '#2575fc',    // 蓝色
+            '#4CAF50',    // 绿色
+            '#FF9800',    // 橙色
+            '#E91E63',    // 粉色
+            '#9C27B0',    // 深紫色
+            '#00BCD4',    // 青色
+            '#FF5722',    // 深橙色
+            '#795548',    // 棕色
+            '#607D8B'     // 蓝灰色
+        ];
+        
+        // 创建100条鱼（减少数量以提高性能）
+        for (let i = 0; i < 100; i++) {
             const fish = document.createElement('div');
             fish.className = 'fish';
             
-            const fishType = fishTypes[Math.floor(Math.random() * fishTypes.length)];
-            fish.innerHTML = fishType;
+            // 创建图片元素
+            const fishImg = document.createElement('img');
+            const fishTypeIndex = Math.floor(Math.random() * fishTypes.length);
+            fishImg.src = fishTypes[fishTypeIndex];
+            fishImg.alt = '鱼';
+            
+            // 使用更清晰的颜色调整
+            const hueRotate = Math.random() * 60 - 30; // 限制在-30到30度之间，避免颜色太奇怪
+            const brightness = 0.9 + Math.random() * 0.3; // 提高亮度
+            const contrast = 1.1 + Math.random() * 0.3; // 提高对比度
+            
+            fishImg.style.filter = `hue-rotate(${hueRotate}deg) brightness(${brightness}) contrast(${contrast})`;
+            fish.appendChild(fishImg);
             
             // 在全屏范围内随机位置
             fish.style.top = `${Math.random() * 100}vh`;
             fish.style.left = `${Math.random() * 100}vw`;
             
-            fish.style.animationDelay = `-${Math.random() * 30}s`;
-            fish.style.animationDuration = `${8 + Math.random() * 40}s`;
+            fish.style.animationDelay = `-${Math.random() * 40}s`;
+            fish.style.animationDuration = `${10 + Math.random() * 40}s`;
             
-            const size = 15 + Math.random() * 60;
-            fish.style.fontSize = `${size}px`;
+            // 随机大小 - 增加最小值
+            const size = 25 + Math.random() * 70;
+            fish.style.width = `${size}px`;
+            fish.style.height = `${size}px`;
             
-            fish.style.opacity = `${0.2 + Math.random() * 0.1}`;
-            fish.style.color = fishColors[Math.floor(Math.random() * fishColors.length)];
+            // 提高透明度
+            const opacity = 0.3 + Math.random() * 0.4;
+            fish.style.opacity = `${opacity}`;
             
             // 随机添加额外的动画类
             const extraClass = fishClasses[Math.floor(Math.random() * fishClasses.length)];
             fish.classList.add(extraClass);
             
-            fish.style.filter = `blur(${Math.random() * 2}px)`;
+            // 减少模糊度
+            fish.style.filter = `blur(${Math.random() * 0.5}px)`;
             fish.style.transform = `rotate(${Math.random() * 360}deg)`;
             
+            // 添加轻微的颜色滤镜
+            const randomColor = fishColors[Math.floor(Math.random() * fishColors.length)];
+            fishImg.style.filter += ` drop-shadow(0 1px 2px ${randomColor}30)`;
+            
+            // 添加鼠标悬停效果
+            fish.addEventListener('mouseenter', function() {
+                if (!document.body.classList.contains('dark-mode')) {
+                    this.style.opacity = '0.9';
+                    this.style.filter = 'blur(0px) brightness(1.3)';
+                    this.querySelector('img').style.transform = 'scale(1.2)';
+                }
+            });
+            
+            fish.addEventListener('mouseleave', function() {
+                const originalOpacity = this.classList.contains('fish-small') ? 0.4 : 
+                                       this.classList.contains('fish-medium') ? 0.5 : 
+                                       this.classList.contains('fish-large') ? 0.35 : 0.3;
+                this.style.opacity = originalOpacity;
+                this.style.filter = `blur(${Math.random() * 0.5}px)`;
+                this.querySelector('img').style.transform = 'scale(1)';
+            });
+            
             fishContainer.appendChild(fish);
+        }
+        
+        // 添加一些特别清晰的大鱼
+        for (let i = 0; i < 8; i++) {
+            const specialFish = document.createElement('div');
+            specialFish.className = 'fish fish-large fish-special';
+            
+            const fishImg = document.createElement('img');
+            // 使用鲸鱼或海豚作为特别大的鱼
+            const specialType = Math.random() > 0.5 ? 'https://img.icons8.com/color/96/000000/whale.png' : 'https://img.icons8.com/color/96/000000/dolphin.png';
+            fishImg.src = specialType;
+            fishImg.alt = '大鱼';
+            fishImg.style.filter = `hue-rotate(${Math.random() * 40 - 20}deg) brightness(1.2) contrast(1.3)`;
+            
+            specialFish.appendChild(fishImg);
+            
+            specialFish.style.top = `${Math.random() * 100}vh`;
+            specialFish.style.left = `${Math.random() * 100}vw`;
+            specialFish.style.animationDelay = `-${Math.random() * 60}s`;
+            specialFish.style.animationDuration = `${50 + Math.random() * 40}s`;
+            specialFish.style.width = '90px';
+            specialFish.style.height = '90px';
+            specialFish.style.opacity = '0.45';
+            
+            // 添加对角线或垂直动画
+            if (Math.random() > 0.5) {
+                specialFish.classList.add('fish-diagonal');
+            } else {
+                specialFish.classList.add('fish-vertical');
+            }
+            
+            fishContainer.appendChild(specialFish);
+        }
+        
+        // 添加一些快速游动的小鱼，更清晰
+        for (let i = 0; i < 15; i++) {
+            const fastFish = document.createElement('div');
+            fastFish.className = 'fish fish-small fish-fast';
+            
+            const fishImg = document.createElement('img');
+            fishImg.src = 'https://img.icons8.com/color/96/000000/clown-fish.png';
+            fishImg.alt = '快速小鱼';
+            fishImg.style.filter = `hue-rotate(${Math.random() * 30 - 15}deg) brightness(1.3) contrast(1.2)`;
+            
+            fastFish.appendChild(fishImg);
+            
+            fastFish.style.top = `${Math.random() * 100}vh`;
+            fastFish.style.left = `${Math.random() * 100}vw`;
+            fastFish.style.animationDelay = `-${Math.random() * 20}s`;
+            fastFish.style.animationDuration = `${5 + Math.random() * 10}s`;
+            fastFish.style.width = '30px';
+            fastFish.style.height = '30px';
+            fastFish.style.opacity = '0.6';
+            fastFish.style.filter = 'blur(0.2px)';
+            
+            fishContainer.appendChild(fastFish);
         }
     }
     
@@ -1213,9 +1339,17 @@
         if (document.body.classList.contains('dark-mode')) {
             icon.className = 'fas fa-sun';
             this.title = '切换到浅色模式';
+            // 在深色模式下调整鱼的亮度
+            document.querySelectorAll('.fish img').forEach(img => {
+                img.style.filter += ' brightness(1.2) contrast(1.2)';
+            });
         } else {
             icon.className = 'fas fa-moon';
             this.title = '切换到深色模式';
+            // 在浅色模式下恢复鱼的亮度
+            document.querySelectorAll('.fish img').forEach(img => {
+                img.style.filter = img.style.filter.replace(' brightness(1.2) contrast(1.2)', '');
+            });
         }
     });
     
