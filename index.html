@@ -31,13 +31,13 @@
             align-items: center;
         }
         
-        /* 游动的鱼动画背景 */
+        /* 游动的鱼动画背景 - 修改为全屏 */
         .fish-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 200px;
+            height: 100vh; /* 改为全屏高度 */
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
@@ -48,8 +48,8 @@
             font-size: 48px;
             color: rgba(106, 17, 203, 0.9);
             animation: swim 20s linear infinite;
-            opacity: 0.1; /* 提高透明度 */
-            filter: none; /* 完全移除模糊 */
+            opacity: 0.1;
+            filter: none;
         }
         
         /* 不同类型的鱼样式 */
@@ -95,6 +95,34 @@
             }
         }
         
+        /* 添加新的垂直游动动画 */
+        .fish-vertical {
+            animation: swimVertical 25s linear infinite;
+        }
+        
+        @keyframes swimVertical {
+            0% {
+                transform: translateY(-100px) rotate(90deg);
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(450deg);
+            }
+        }
+        
+        /* 添加新的对角线游动动画 */
+        .fish-diagonal {
+            animation: swimDiagonal 30s linear infinite;
+        }
+        
+        @keyframes swimDiagonal {
+            0% {
+                transform: translate(-100px, -100px) rotate(45deg);
+            }
+            100% {
+                transform: translate(calc(100vw + 100px), calc(100vh + 100px)) rotate(405deg);
+            }
+        }
+        
         /* 点击特效 */
         .click-effect {
             position: absolute;
@@ -126,13 +154,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(245, 247, 250, 0.7); /* 添加半透明背景确保内容可读性 */
+            border-radius: 16px;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
         
         header {
             text-align: center;
             margin-bottom: 10px;
             width: 100%;
-            padding-top: 40px;
+            padding-top: 20px;
         }
         
         h1 {
@@ -446,29 +480,27 @@
         .search { background: linear-gradient(135deg, #D4FC79 0%, #96E6A1 100%); }
         .tools { background: linear-gradient(135deg, #FFAFBD 0%, #ffc3a0 100%); }
         
-footer {
-    text-align: center;
-    color: #95a5a6;
-    font-size: 14px;
-    padding: 25px 0;
-    width: 100%;
-    max-width: 100%;
-    background-color: #f5f7fa;
-    margin: 40px auto 0;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* 垂直居中内容 */
-}
+        footer {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 14px;
+            padding: 25px 0;
+            width: 100%;
+            max-width: 100%;
+            margin: 40px auto 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
         
         .footer-content {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 25px 30px;
-            background-color: white;
+            padding: 15px 30px;
             border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid #f0f0f0;
             position: relative;
             overflow: hidden;
         }
@@ -590,7 +622,7 @@ footer {
             }
             
             .search-container {
-                max-width: 600px;
+                max-width: 700px;
             }
             
             .search-input {
@@ -655,7 +687,7 @@ footer {
             }
             
             .search-container {
-                max-width: 90%;
+                max-width: 450px;
                 margin-bottom: 30px;
             }
             
@@ -753,6 +785,10 @@ footer {
             color: #e6e6e6;
         }
         
+        .dark-mode .container {
+            background-color: rgba(26, 26, 46, 0.85);
+        }
+        
         .dark-mode .nav-card {
             background-color: #16213e;
             color: #e6e6e6;
@@ -770,13 +806,16 @@ footer {
         }
         
         .dark-mode footer {
-            background-color: #1a1a2e;
+            background-color: transparent;
+            color: #b0b0b0;
         }
         
         .dark-mode .footer-content {
-            background-color: #16213e;
-            color: #e6e6e6;
-            border-color: #0f3460;
+            background-color: transparent;
+            color: #b0b0b0; 
+            border: none; 
+            box-shadow: none;
+            padding: 15px 30px;
         }
         
         .dark-mode .tagline {
@@ -1010,81 +1049,59 @@ footer {
 
             </div>
         </div>
+    </div>
     
     <footer>
-        <div>
+        <div class="footer-content">
             <p>向海风许愿，在山海相见</p>
             <p>© 2026 罗小鱼 · 个人导航 | 影视导航</p>
         </div>
     </footer>
-</div>
 
     <script>
-    // 游动的鱼背景初始化
+    // 游动的鱼背景初始化 - 全屏版本
     function initFishBackground() {
         const fishContainer = document.getElementById('fishBackground');
-        const fishTypes = ['🐠', '🐟', '🐡', '🐬', '🐳', '🦈', '🐋', '🦑', '🐙', '🦐',  '🦀', '🦞', '🦪', '🐌', '🐢', '🦦', '🐊', '🦩', '🐸'];
-        const fishClasses = ['fish-small', 'fish-medium', 'fish-large', 'fish-fast', 'fish-slow', 'fish-reverse'];
+        const fishTypes = ['🐠', '🐟', '🐡', '🐬', '🐳', '🦈', '🐋', '🦑', '🐙', '🦐',  '🦀', '🦞', '🐌', '🐢', '🐊', '🐸'];
+        const fishClasses = ['fish-small', 'fish-medium', 'fish-large', 'fish-fast', 'fish-slow', 'fish-reverse', 'fish-vertical', 'fish-diagonal'];
         const fishColors = [
-         'rgba(106, 17, 203, 0.80)',    // 主色，提高透明度
-        'rgba(37, 117, 252, 0.80)',    // 蓝色，提高透明度
-        'rgba(255, 87, 34, 0.80)',     // 更亮的橙色
-        'rgba(255, 64, 129, 0.80)',    // 更亮的粉色
-        'rgba(76, 175, 80, 0.80)',     // 绿色，提高透明度
-        'rgba(156, 39, 176, 0.80)',    // 紫色，提高透明度
-        'rgba(3, 169, 244, 0.80)',     // 更亮的蓝色
-        'rgba(233, 30, 99, 0.80)'      // 亮粉色，提高透明度
+            'rgba(106, 17, 203)',    // 主色
+            'rgba(37, 117, 252)',    // 蓝色
+            'rgba(255, 87, 34',     // 更亮的橙色
+            'rgba(255, 64, 129)',    // 更亮的粉色
+            'rgba(76, 175, 80)',     // 绿色
+            'rgba(156, 39, 176)',    // 紫色
+            'rgba(3, 169, 244)',     // 更亮的蓝色
+            'rgba(233, 30, 99)'      // 亮粉色
         ];
         
-        // 创建20条鱼
-        for (let i = 0; i < 20; i++) {
+        // 创建120条鱼（全屏需要更多鱼）
+        for (let i = 0; i < 120; i++) {
             const fish = document.createElement('div');
             fish.className = 'fish';
             
             const fishType = fishTypes[Math.floor(Math.random() * fishTypes.length)];
             fish.innerHTML = fishType;
             
-            fish.style.top = `${Math.random() * 180}px`;
-            fish.style.left = `${Math.random() * 100}px`;
+            // 在全屏范围内随机位置
+            fish.style.top = `${Math.random() * 100}vh`;
+            fish.style.left = `${Math.random() * 100}vw`;
             
             fish.style.animationDelay = `-${Math.random() * 30}s`;
-            fish.style.animationDuration = `${10 + Math.random() * 30}s`;
+            fish.style.animationDuration = `${8 + Math.random() * 40}s`;
             
-            const size = 20 + Math.random() * 50;
+            const size = 15 + Math.random() * 60;
             fish.style.fontSize = `${size}px`;
             
-            fish.style.opacity = `${0.2 + Math.random() * 0.6}`;
+            fish.style.opacity = `${0.2 + Math.random() * 0.1}`;
             fish.style.color = fishColors[Math.floor(Math.random() * fishColors.length)];
             
+            // 随机添加额外的动画类
             const extraClass = fishClasses[Math.floor(Math.random() * fishClasses.length)];
             fish.classList.add(extraClass);
             
-            fish.style.filter = `blur(${Math.random() * 1.5}px)`;
+            fish.style.filter = `blur(${Math.random() * 2}px)`;
             fish.style.transform = `rotate(${Math.random() * 360}deg)`;
-            
-            fishContainer.appendChild(fish);
-        }
-        
-        // 添加一些反向游动的鱼
-        for (let i = 0; i < 10; i++) {
-            const fish = document.createElement('div');
-            fish.className = 'fish fish-reverse';
-            
-            const fishType = fishTypes[Math.floor(Math.random() * fishTypes.length)];
-            fish.innerHTML = fishType;
-            
-            fish.style.top = `${Math.random() * 180}px`;
-            fish.style.left = `${Math.random() * 100 + 50}px`;
-            
-            fish.style.animationDelay = `-${Math.random() * 30}s`;
-            fish.style.animationDuration = `${15 + Math.random() * 25}s`;
-            
-            const size = 15 + Math.random() * 30;
-            fish.style.fontSize = `${size}px`;
-            
-            fish.style.opacity = `${0.1 + Math.random() * 0.4}`;
-            fish.style.color = fishColors[Math.floor(Math.random() * fishColors.length)];
-            fish.style.filter = `blur(${Math.random() * 1}px)`;
             
             fishContainer.appendChild(fish);
         }
