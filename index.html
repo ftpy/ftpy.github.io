@@ -417,7 +417,7 @@
             margin: 0 auto;
         }
         
-        /* 统一卡片大小 */
+        /* 统一卡片大小 - 调整高度适应无图标 */
         .nav-card {
             background-color: white;
             border-radius: 16px;
@@ -430,12 +430,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             border: 1px solid #f0f0f0;
             position: relative;
             overflow: hidden;
-            height: 220px;
-            min-height: 220px;
+            height: 180px; /* 调整高度 */
+            min-height: 180px; /* 调整最小高度 */
         }
         
         .nav-card:before {
@@ -459,29 +459,12 @@
             transform: scaleX(1);
         }
         
-        .nav-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            font-size: 28px;
-            color: white;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-        
-        .nav-card:hover .nav-icon {
-            transform: rotate(10deg) scale(1.1);
-        }
-        
         .nav-title {
             font-size: 20px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             line-height: 1.3;
+            padding-top: 10px;
         }
         
         .nav-desc {
@@ -493,14 +476,6 @@
             align-items: center;
             justify-content: center;
         }
-        
-        /* 不同图标的背景色 */
-        .github { background: linear-gradient(135deg, #333 0%, #6e5494 100%); }
-        .vivo { background: linear-gradient(135deg, #A3BFFA 0%, #6991C7 100%); }
-        .honor { background: linear-gradient(135deg, #FFECD2 0%, #FCB69F 100%); }
-        .sunflower { background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%); }
-        .search { background: linear-gradient(135deg, #D4FC79 0%, #96E6A1 100%); }
-        .tools { background: linear-gradient(135deg, #FFAFBD 0%, #ffc3a0 100%); }
         
         footer {
             text-align: center;
@@ -579,8 +554,8 @@
             }
             
             .nav-card {
-                height: 210px;
-                min-height: 210px;
+                height: 170px; /* 调整高度 */
+                min-height: 170px; /* 调整最小高度 */
             }
             
             .search-container {
@@ -602,8 +577,8 @@
             .nav-card {
                 width: 100%;
                 min-width: 100%;
-                height: 200px;
-                min-height: 200px;
+                height: 160px; /* 调整高度 */
+                min-height: 160px; /* 调整最小高度 */
             }
             
             .category-title:before, .category-title:after {
@@ -632,15 +607,9 @@
             }
             
             .nav-card {
-                height: 200px;
-                min-height: 200px;
+                height: 160px; /* 调整高度 */
+                min-height: 160px; /* 调整最小高度 */
                 padding: 20px 15px;
-            }
-            
-            .nav-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
             }
             
             .search-container {
@@ -671,8 +640,8 @@
             .nav-card {
                 width: 100%;
                 min-width: 100%;
-                height: 190px;
-                min-height: 190px;
+                height: 150px; /* 调整高度 */
+                min-height: 150px; /* 调整最小高度 */
                 max-width: 500px;
                 margin: 0 auto;
             }
@@ -695,8 +664,8 @@
             }
             
             .nav-card {
-                height: 190px;
-                min-height: 190px;
+                height: 150px; /* 调整高度 */
+                min-height: 150px; /* 调整最小高度 */
                 padding: 18px 12px;
             }
             
@@ -709,7 +678,7 @@
             }
             
             .search-container {
-                max-width: 450px;
+                max-width: 480px; /* 手机端缩短宽度 */
                 margin-bottom: 30px;
             }
             
@@ -717,25 +686,28 @@
                 font-size: 18px;
             }
             
+            /* 手机端搜索框保持单行样式，不换行 */
             .search-box {
-                flex-direction: column;
-                border-radius: 20px;
+                flex-direction: row; /* 保持行内布局 */
+                border-radius: 50px; /* 保持圆形 */
             }
             
             .search-input {
                 padding: 15px 20px;
-                border-bottom: 1px solid #eef2f7;
+                border-bottom: none; /* 移除下边框 */
+                font-size: 14px; /* 稍微缩小字体 */
             }
             
             .search-button {
-                padding: 15px;
-                width: 100%;
-                border-radius: 0 0 20px 20px;
+                padding: 0 20px; /* 减小按钮宽度 */
+                width: auto; /* 恢复自动宽度 */
+                border-radius: 0 50px 50px 0; /* 保持右侧圆角 */
+                font-size: 14px; /* 稍微缩小字体 */
             }
             
             .search-button:hover {
-                padding: 15px;
-                border-radius: 0 0 20px 20px;
+                padding: 0 22px; /* 稍微增加一点 */
+                border-radius: 0 50px 50px 0;
             }
             
             .footer-content {
@@ -765,6 +737,22 @@
             
             .nav-card {
                 max-width: 400px;
+                height: 140px; /* 调整高度 */
+                min-height: 140px; /* 调整最小高度 */
+            }
+            
+            .search-container {
+                max-width: 320px; /* 更小屏幕再缩短一点 */
+            }
+            
+            .search-input {
+                padding: 14px 18px; /* 减小内边距 */
+                font-size: 13px; /* 更小字体 */
+            }
+            
+            .search-button {
+                padding: 0 16px; /* 减小按钮宽度 */
+                font-size: 13px; /* 更小字体 */
             }
             
             .footer-content {
@@ -774,6 +762,12 @@
             
             h1 {
                 font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .search-container {
+                max-width: 300px; /* 最小屏幕再次缩短 */
             }
         }
         
@@ -915,35 +909,23 @@
             <div class="nav-grid">
                 <a href="https://sshd.mysxl.cn/" class="nav-card" target="_blank">
                     <div class="category-tag category-tech">常用</div>
-                    <div class="nav-icon github">
-                        <i class="fas fa-blog"></i>
-                    </div>
                     <div class="nav-title">博客</div>
                     <div class="nav-desc">个人博客</div>
                 </a>
                 
                 <a href="https://yun.vivo.com.cn/" class="nav-card" target="_blank">
                     <div class="category-tag category-tech">常用</div>
-                    <div class="nav-icon github">
-                        <i class="fa-solid fa-comment"></i>
-                    </div>
                     <div class="nav-title">维沃云服务</div>
                     <div class="nav-desc">手机云服务</div>
                 </a>
                 <a href="https://cloud.hihonor.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-tech">常用</div>
-                    <div class="nav-icon github">
-                        <i class="fa-solid fa-cloud-arrow-down"></i>
-                    </div>
                     <div class="nav-title">荣耀云服务</div>
                     <div class="nav-desc">手机云服务</div>
                 </a>
                 
                 <a href="https://gitee.com/sshd/xiaoyu" class="nav-card" target="_blank">
                     <div class="category-tag category-tech">常用</div>
-                    <div class="nav-icon github">
-                        <i class="fa-solid fa-crown"></i>
-                    </div>
                     <div class="nav-title">小鱼开源</div>
                     <div class="nav-desc">代码仓库</div>
                 </a>
@@ -956,72 +938,48 @@
             <div class="nav-grid">
                 <a href="https://tv.baozangdh.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-tool">影视</div>
-                    <div class="nav-icon tools">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
                     <div class="nav-title">影视宝藏</div>
                     <div class="nav-desc">免费影视导航</div>
                 </a>
                 
                 <a href="https://www.klyingshi.top/" class="nav-card" target="_blank">
                     <div class="category-tag category-tool">影视</div>
-                    <div class="nav-icon tools">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
                     <div class="nav-title">可乐影视</div>
                     <div class="nav-desc">免费影视导航</div>
                 </a>
                 
                 <a href="https://yinghezhinan.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-tool">影视</div>
-                    <div class="nav-icon tools">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
                     <div class="nav-title">硬核影视</div>
                     <div class="nav-desc">免费影视导航</div>
                 </a>
                 
                 <a href="https://faxianx.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-tool">影视</div>
-                    <div class="nav-icon tools">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
                     <div class="nav-title">发现之门</div>
                     <div class="nav-desc">免费影视导航</div>
                 </a>
 
                 <a href="https://kimivod.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-lvse">在线</div>
-                    <div class="nav-icon sunflower">
-                        <i class="fa-brands fa-sketch"></i>
-                    </div>
                     <div class="nav-title">kimivod</div>
                     <div class="nav-desc">在线影视</div>
                 </a>
                 
                 <a href="https://hellociqryx6e.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-lvse">在线</div>
-                    <div class="nav-icon sunflower">
-                        <i class="fa-brands fa-sketch"></i>
-                    </div>
                     <div class="nav-title">极光影视</div>
                     <div class="nav-desc">在线影视</div>
                 </a>
                 
                 <a href="https://www.zxzjys.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-lvse">在线</div>
-                    <div class="nav-icon sunflower">
-                        <i class="fa-brands fa-sketch"></i>
-                    </div>
                     <div class="nav-title">在线之家</div>
                     <div class="nav-desc">在线影视</div>
                 </a>
                 
                 <a href="https://gaze.run/" class="nav-card" target="_blank">
                     <div class="category-tag category-lvse">在线</div>
-                    <div class="nav-icon sunflower">
-                        <i class="fa-brands fa-sketch"></i>
-                    </div>
                     <div class="nav-title">注视影视</div>
                     <div class="nav-desc">在线影视</div>
                 </a>
@@ -1035,36 +993,24 @@
             <div class="nav-grid">
                 <a href="https://yinghezhinan.com/ios-app/" class="nav-card" target="_blank">
                     <div class="category-tag category-tool">软件</div>
-                    <div class="nav-icon vivo">
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </div>
                     <div class="nav-title">变身影视</div>
                     <div class="nav-desc">iOS追剧必备</div>
                 </a>
                 
                 <a href="https://www.dyg55.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-tool">种子</div>
-                    <div class="nav-icon vivo">
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </div>
                     <div class="nav-title">电影港网</div>
                     <div class="nav-desc">无水印4K影视</div>
                 </a>
                 
                 <a href="https://www.mjf2020.com/" class="nav-card" target="_blank">
                     <div class="category-tag category-tool">种子</div>
-                    <div class="nav-icon vivo">
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </div>
                     <div class="nav-title">美剧粉</div>
                     <div class="nav-desc">纯粹的美剧网</div>
                 </a>
                 
                 <a href="https://www.hdzu.cc/" class="nav-card" target="_blank">
                     <div class="category-tag category-tool">种子</div>
-                    <div class="nav-icon vivo">
-                        <i class="fa-solid fa-arrow-down"></i>
-                    </div>
                     <div class="nav-title">高清族</div>
                     <div class="nav-desc">电影种子资源站</div>
                 </a>
