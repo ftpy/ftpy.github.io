@@ -175,11 +175,10 @@
             align-items: center;
             position: relative;
             z-index: 1;
-            background-color: rgba(245, 247, 250, 0.85); /* 增加背景透明度确保内容可读性 */
+            background-color: rgba(245, 247, 250, 0.7); /* 降低背景透明度，让鱼更清晰 */
             border-radius: 16px;
             margin-top: 20px;
             margin-bottom: 20px;
-            backdrop-filter: blur(2px); /* 轻微背景模糊 */
         }
         
         header {
@@ -199,13 +198,12 @@
             background-clip: text;
             font-weight: 800;
             letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加文字阴影提高可读性 */
         }
         
         .subtitle {
             color: #2c3e50;
             font-size: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 60px;
             min-height: 30px;
             font-weight: 500;
         }
@@ -219,88 +217,6 @@
             font-size: 16px;
             margin-bottom: 30px;
             box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
-        }
-        
-        /* 搜索框样式 */
-        .search-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-            text-align: center;
-        }
-        
-        .search-title {
-            font-size: 20px;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .search-box {
-            position: relative;
-            width: 100%;
-            display: flex;
-            background-color: white;
-            border-radius: 50px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 2px solid #eef2f7;
-        }
-        
-        .search-box:hover {
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-            transform: translateY(-3px);
-        }
-        
-        .search-input {
-            flex: 1;
-            padding: 18px 25px;
-            font-size: 16px;
-            border: none;
-            outline: none;
-            background: transparent;
-            color: #2c3e50;
-        }
-        
-        .search-button {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            border: none;
-            padding: 0 35px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            border-radius: 0 50px 50px 0;
-        }
-        
-        .search-button:hover {
-            background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
-            padding: 0 40px;
-        }
-        
-        .search-button i {
-            font-size: 18px;
-        }
-        
-        .search-hint {
-            margin-top: 12px;
-            font-size: 14px;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .search-hint i {
-            color: #4CAF50;
         }
         
         .main-link {
@@ -386,26 +302,6 @@
         .category-title:after {
             right: -60px;
         }
-        
-        /* 分类标签样式 */
-        .category-tag {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: bold;
-            color: white;
-            z-index: 2;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .category-tech { background-color: #3498db; }
-        .category-tool { background-color: #e74c3c; }
-        .category-lvse { background-color: #3ce73c; }
         
         /* 卡片网格 - 固定宽度布局 */
         .nav-grid {
@@ -558,10 +454,6 @@
                 min-height: 170px; /* 调整最小高度 */
             }
             
-            .search-container {
-                max-width: 700px;
-            }
-            
             .footer-content {
                 max-width: 1000px;
             }
@@ -597,11 +489,6 @@
                 font-size: 36px;
             }
             
-            .category-tag {
-                font-size: 10px;
-                padding: 2px 8px;
-            }
-            
             .category-title {
                 font-size: 20px;
             }
@@ -610,18 +497,6 @@
                 height: 160px; /* 调整高度 */
                 min-height: 160px; /* 调整最小高度 */
                 padding: 20px 15px;
-            }
-            
-            .search-container {
-                max-width: 700px;
-            }
-            
-            .search-input {
-                padding: 16px 20px;
-            }
-            
-            .search-button {
-                padding: 0 25px;
             }
             
             .footer-content {
@@ -677,39 +552,6 @@
                 font-size: 13px;
             }
             
-            .search-container {
-                max-width: 480px; /* 手机端缩短宽度 */
-                margin-bottom: 30px;
-            }
-            
-            .search-title {
-                font-size: 18px;
-            }
-            
-            /* 手机端搜索框保持单行样式，不换行 */
-            .search-box {
-                flex-direction: row; /* 保持行内布局 */
-                border-radius: 50px; /* 保持圆形 */
-            }
-            
-            .search-input {
-                padding: 15px 20px;
-                border-bottom: none; /* 移除下边框 */
-                font-size: 14px; /* 稍微缩小字体 */
-            }
-            
-            .search-button {
-                padding: 0 20px; /* 减小按钮宽度 */
-                width: auto; /* 恢复自动宽度 */
-                border-radius: 0 50px 50px 0; /* 保持右侧圆角 */
-                font-size: 14px; /* 稍微缩小字体 */
-            }
-            
-            .search-button:hover {
-                padding: 0 22px; /* 稍微增加一点 */
-                border-radius: 0 50px 50px 0;
-            }
-            
             .footer-content {
                 max-width: 100%;
                 padding: 18px 20px;
@@ -741,20 +583,6 @@
                 min-height: 140px; /* 调整最小高度 */
             }
             
-            .search-container {
-                max-width: 320px; /* 更小屏幕再缩短一点 */
-            }
-            
-            .search-input {
-                padding: 14px 18px; /* 减小内边距 */
-                font-size: 13px; /* 更小字体 */
-            }
-            
-            .search-button {
-                padding: 0 16px; /* 减小按钮宽度 */
-                font-size: 13px; /* 更小字体 */
-            }
-            
             .footer-content {
                 max-width: 400px;
                 margin: 0 10px;
@@ -762,12 +590,6 @@
             
             h1 {
                 font-size: 28px;
-            }
-        }
-        
-        @media (max-width: 360px) {
-            .search-container {
-                max-width: 300px; /* 最小屏幕再次缩短 */
             }
         }
         
@@ -851,24 +673,6 @@
             background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
         }
         
-        .dark-mode .search-title {
-            color: #e6e6e6;
-        }
-        
-        .dark-mode .search-box {
-            background-color: #16213e;
-            border-color: #0f3460;
-        }
-        
-        .dark-mode .search-input {
-            background-color: #16213e;
-            color: #e6e6e6;
-        }
-        
-        .dark-mode .search-hint {
-            color: #b0b0b0;
-        }
-        
         .dark-mode .fish {
             filter: brightness(1.2) contrast(1.2) opacity(0.5);
         }
@@ -890,39 +694,25 @@
             <p class="subtitle" id="subtitle">一个链接，聚合、分享你的所有信息</p>
         </header>
         
-        <!-- 百度搜索框 -->
-        <div class="search-container">
-            <form id="baiduSearchForm" action="https://www.baidu.com/s" method="get" target="_blank" class="search-box">
-                <input type="text" name="wd" placeholder="输入关键词进行百度搜索..." class="search-input" id="searchInput" autocomplete="off">
-                <button type="submit" class="search-button">
-                    <i class="fas fa-search"></i> 搜索
-                </button>
-            </form>
-        </div>
-        
         <!-- 常用分类 -->
         <div class="category-group">
             <h2 class="category-title">常用</h2>
             <div class="nav-grid">
                 <a href="https://sshd.mysxl.cn/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tech">常用</div>
                     <div class="nav-title">博客</div>
                     <div class="nav-desc">个人博客</div>
                 </a>
                 
                 <a href="https://yun.vivo.com.cn/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tech">常用</div>
                     <div class="nav-title">维沃云服务</div>
                     <div class="nav-desc">手机云服务</div>
                 </a>
                 <a href="https://cloud.hihonor.com/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tech">常用</div>
                     <div class="nav-title">荣耀云服务</div>
                     <div class="nav-desc">手机云服务</div>
                 </a>
                 
                 <a href="https://gitee.com/sshd/xiaoyu" class="nav-card" target="_blank">
-                    <div class="category-tag category-tech">常用</div>
                     <div class="nav-title">小鱼开源</div>
                     <div class="nav-desc">代码仓库</div>
                 </a>
@@ -934,49 +724,41 @@
             <h2 class="category-title">影视</h2>
             <div class="nav-grid">
                 <a href="https://tv.baozangdh.com/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tool">影视</div>
                     <div class="nav-title">影视宝藏</div>
                     <div class="nav-desc">免费影视导航</div>
                 </a>
                 
                 <a href="https://www.klyingshi.top/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tool">影视</div>
                     <div class="nav-title">可乐影视</div>
                     <div class="nav-desc">免费影视导航</div>
                 </a>
                 
                 <a href="https://yinghezhinan.com/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tool">影视</div>
                     <div class="nav-title">硬核影视</div>
                     <div class="nav-desc">免费影视导航</div>
                 </a>
                 
                 <a href="https://faxianx.com/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tool">影视</div>
                     <div class="nav-title">发现之门</div>
                     <div class="nav-desc">免费影视导航</div>
                 </a>
 
                 <a href="https://kimivod.com/" class="nav-card" target="_blank">
-                    <div class="category-tag category-lvse">在线</div>
                     <div class="nav-title">kimivod</div>
                     <div class="nav-desc">在线影视</div>
                 </a>
                 
                 <a href="https://hellociqryx6e.com/" class="nav-card" target="_blank">
-                    <div class="category-tag category-lvse">在线</div>
                     <div class="nav-title">极光影视</div>
                     <div class="nav-desc">在线影视</div>
                 </a>
                 
                 <a href="https://www.zxzjys.com/" class="nav-card" target="_blank">
-                    <div class="category-tag category-lvse">在线</div>
                     <div class="nav-title">在线之家</div>
                     <div class="nav-desc">在线影视</div>
                 </a>
                 
                 <a href="https://gaze.run/" class="nav-card" target="_blank">
-                    <div class="category-tag category-lvse">在线</div>
                     <div class="nav-title">注视影视</div>
                     <div class="nav-desc">在线影视</div>
                 </a>
@@ -989,25 +771,21 @@
             <h2 class="category-title">下载</h2>
             <div class="nav-grid">
                 <a href="https://yinghezhinan.com/ios-app/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tool">软件</div>
                     <div class="nav-title">变身影视</div>
                     <div class="nav-desc">iOS追剧必备</div>
                 </a>
                 
                 <a href="https://www.dyg55.com/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tool">种子</div>
                     <div class="nav-title">电影港网</div>
                     <div class="nav-desc">无水印4K影视</div>
                 </a>
                 
                 <a href="https://www.mjf2020.com/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tool">种子</div>
                     <div class="nav-title">美剧粉</div>
                     <div class="nav-desc">纯粹的美剧网</div>
                 </a>
                 
                 <a href="https://www.hdzu.cc/" class="nav-card" target="_blank">
-                    <div class="category-tag category-tool">种子</div>
                     <div class="nav-title">高清族</div>
                     <div class="nav-desc">电影种子资源站</div>
                 </a>
@@ -1188,17 +966,6 @@
             document.body.style.opacity = '1';
         }, 100);
         
-        // 搜索框显示效果
-        const searchContainer = document.querySelector('.search-container');
-        searchContainer.style.opacity = '0';
-        searchContainer.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            searchContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            searchContainer.style.opacity = '1';
-            searchContainer.style.transform = 'translateY(0)';
-        }, 200);
-        
         // 卡片逐个显示效果
         const cards = document.querySelectorAll('.nav-card');
         cards.forEach((card, index) => {
@@ -1322,47 +1089,8 @@
     document.querySelectorAll('.nav-card').forEach(card => {
         card.addEventListener('click', function() {
             const title = this.querySelector('.nav-title').textContent;
-            const category = this.querySelector('.category-tag').textContent;
-            console.log(`导航卡片被点击: ${title} (${category})`);
+            console.log(`导航卡片被点击: ${title}`);
         });
-    });
-    
-    // 百度搜索表单处理
-    const searchForm = document.getElementById('baiduSearchForm');
-    const searchInput = document.getElementById('searchInput');
-    
-    searchForm.addEventListener('submit', function(e) {
-        if (!searchInput.value.trim()) {
-            e.preventDefault();
-            searchInput.focus();
-            searchInput.style.boxShadow = '0 0 0 2px rgba(255, 0, 0, 0.2)';
-            setTimeout(() => {
-                searchInput.style.boxShadow = 'none';
-            }, 1000);
-            return false;
-        }
-    });
-    
-    // 搜索框焦点效果
-    searchInput.addEventListener('focus', function() {
-        this.parentElement.style.boxShadow = '0 12px 30px rgba(76, 175, 80, 0.2)';
-    });
-    
-    searchInput.addEventListener('blur', function() {
-        this.parentElement.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
-    });
-    
-    // 搜索框快捷键
-    document.addEventListener('keydown', function(e) {
-        if (e.target !== searchInput) {
-            if (e.key === '/' && !e.ctrlKey && !e.altKey && !e.metaKey) {
-                e.preventDefault();
-                searchInput.focus();
-            }
-        } else if (e.key === 'Escape') {
-            searchInput.value = '';
-            searchInput.blur();
-        }
     });
 </script>
 </body>
