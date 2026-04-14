@@ -149,7 +149,6 @@
             box-shadow: 0 8px 20px rgba(67, 100, 173, 0.25);
             backdrop-filter: blur(4px);
         }
-        /* 移除不需要的文字，但保留tagline结构，内容在JS中清空/隐藏 */
         
         .main-link {
             display: inline-block;
@@ -213,7 +212,7 @@
             margin: 0 auto;
         }
         
-        /* 卡片 —— 使用emoji大图标 */
+        /* 卡片 */
         .nav-card {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
@@ -254,7 +253,6 @@
         }
         .nav-card:hover:before { transform: scaleX(1); }
         
-        /* 卡片图标区 —— 显示emoji */
         .card-icon {
             font-size: 58px;
             margin-bottom: 18px;
@@ -280,26 +278,24 @@
             letter-spacing: 0.3px;
         }
         
-        /* 隐藏描述 */
         .nav-desc { display: none; }
         
         footer {
             text-align: center;
             color: #2c3e50;
             font-size: 15px;
-            padding: 30px 0 20px;
-            width: 100%;
-            max-width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-        }
-        .footer-content {
+            padding: 0 25px 20px;
             width: 100%;
             max-width: 1300px;
             margin: 0 auto;
-            padding: 20px 30px;
+            display: flex;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .footer-content {
+            width: 100%;
+            padding: 20px 0;
             border-radius: 50px;
             background: rgba(240, 246, 255, 0.35);
             backdrop-filter: blur(8px);
@@ -326,18 +322,25 @@
         @media (max-width: 1200px) {
             .nav-grid { grid-template-columns: repeat(3, 1fr); }
         }
+        
         @media (max-width: 992px) {
             .nav-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
             .category-title:before, .category-title:after { width: 35px; }
             .category-title:before { left: -50px; }
             .category-title:after { right: -50px; }
         }
+        
         @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px 15px;
+            }
+            
             .nav-grid {
                 grid-template-columns: 1fr;
                 max-width: 480px;
                 margin-left: auto;
                 margin-right: auto;
+                width: 100%;
             }
             
             .nav-card {
@@ -355,8 +358,13 @@
                 font-size: 38px;
             }
             
-            .container {
-                padding: 20px 15px 15px;
+            footer {
+                padding: 0 15px 20px;
+                max-width: 510px;
+            }
+            
+            .footer-content {
+                padding: 20px 0;
             }
         }
     </style>
@@ -368,23 +376,19 @@
         <header>
             <h1>小鱼导航</h1>
             <p class="subtitle" id="subtitle">一个链接，聚合、分享你的所有信息</p>
-            <!-- tagline 已清空 (移除"随心所向 · 200+ 灵动图标") -->
             <div class="tagline" id="tagline" style="display: none;"></div>
         </header>
         
-        <!-- 常用分类 -->
         <div class="category-group">
             <h2 class="category-title"><i class="fa-regular fa-star" style="margin-right: 12px;"></i>常用</h2>
             <div class="nav-grid" id="grid-common"></div>
         </div>
         
-        <!-- 影视分类 -->
         <div class="category-group">
             <h2 class="category-title"><i class="fa-solid fa-clapperboard" style="margin-right: 12px;"></i>影视</h2>
             <div class="nav-grid" id="grid-movie"></div>
         </div>
 
-        <!-- 下载分类 -->
         <div class="category-group">
             <h2 class="category-title"><i class="fa-solid fa-download" style="margin-right: 12px;"></i>下载</h2>
             <div class="nav-grid" id="grid-download"></div>
@@ -402,7 +406,6 @@
         (function(){
             "use strict";
 
-            // ---------- 游动的鱼背景 (保留超过200个元素) ----------
             function initFishBackground() {
                 const fishContainer = document.getElementById('fishBackground');
                 const fishUrls = [
@@ -438,7 +441,6 @@
                     fish.classList.add(fishClasses[Math.floor(Math.random()*fishClasses.length)]);
                     fishContainer.appendChild(fish);
                 }
-                // 额外大鱼
                 for (let i=0;i<18;i++) {
                     const big = document.createElement('div');
                     big.className = 'fish fish-large fish-special';
@@ -466,7 +468,6 @@
                 }
             }
 
-            // ---------- 使用提供的Emoji列表 ----------
             const emojiList = [
                 '😊', '😄', '😃', '😀', '😁', '😆', '😅', '🤣', '😂', '🙂',
                 '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚', '🤗',
@@ -490,7 +491,6 @@
                 return emojiList[Math.floor(Math.random() * emojiList.length)];
             }
 
-            // 卡片数据 (无desc)
             const commonLinks = [
                 { title: '博客', url: 'https://sshd.mysxl.cn/' },
                 { title: '维沃云服务', url: 'https://yun.vivo.com.cn/' },
@@ -526,7 +526,6 @@
                     
                     const iconDiv = document.createElement('div');
                     iconDiv.className = 'card-icon';
-                    // 使用Emoji代替FontAwesome图标
                     iconDiv.textContent = getRandomEmoji();
                     
                     const titleDiv = document.createElement('div');
@@ -539,7 +538,6 @@
                 });
             }
 
-            // 页面加载
             window.addEventListener('load', function() {
                 initFishBackground();
                 
@@ -569,7 +567,6 @@
                 }
             });
 
-            // 点击特效 (保留)
             document.addEventListener('click', function(e) {
                 const effect = document.createElement('div');
                 effect.className = 'click-effect';
@@ -590,7 +587,6 @@
                 setTimeout(() => textEffect.remove(), 1400);
             });
 
-            // 动态问候
             const greetings = ["欢迎来到小鱼导航", "Emoji 图标随心配", "影视聚合·下载无忧", "一个链接，无限可能", "小鱼 · 灵动空间"];
             let idx = 0;
             const subtitle = document.getElementById('subtitle');
@@ -602,7 +598,6 @@
                 }, 4500);
             }
             
-            // 隐藏tagline (移除指定文字)
             const taglineEl = document.getElementById('tagline');
             if(taglineEl) taglineEl.style.display = 'none';
         })();
