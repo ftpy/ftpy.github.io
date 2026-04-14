@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>罗小鱼 · 个人导航</title>
-    
-    <!-- 添加网站图标 (favicon) -->
+    <title>罗小鱼 · 灵动导航</title>
     <link rel="icon" href="https://img.icons8.com/color/48/google-photos-new.png">
     <link rel="shortcut icon" href="https://img.icons8.com/color/48/google-photos-new.png">
     <link rel="apple-touch-icon" href="https://img.icons8.com/color/96/google-photos-new.png">
-    
+    <!-- Font Awesome (保留用于其他装饰, 但卡片图标将使用Emoji) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -20,8 +18,8 @@
         }
         
         body {
-            background-color: #f5f7fa;
-            color: #333;
+            background-color: #f0f4fa;
+            color: #1e293b;
             line-height: 1.6;
             min-height: 100vh;
             position: relative;
@@ -31,13 +29,13 @@
             align-items: center;
         }
         
-        /* 游动的鱼动画背景 - 修改为全屏 */
+        /* 游动的鱼背景 (保留原有动态效果) */
         .fish-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh; /* 改为全屏高度 */
+            height: 100vh;
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
@@ -46,8 +44,8 @@
         .fish {
             position: absolute;
             animation: swim 20s linear infinite;
-            filter: none;
             will-change: transform;
+            pointer-events: none;
         }
         
         .fish img {
@@ -55,94 +53,33 @@
             height: 100%;
             object-fit: contain;
             transition: transform 0.3s ease;
-            image-rendering: -webkit-optimize-contrast; /* 提高图片清晰度 */
             image-rendering: crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
         }
         
-        /* 不同类型的鱼样式 - 调整透明度让鱼更清晰 */
-        .fish-small {
-            width: 28px;
-            height: 28px;
-            opacity: 0.6; /* 提高透明度 */
-            animation-duration: 15s;
-            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
-        }
-        
-        .fish-medium {
-            width: 40px;
-            height: 40px;
-            opacity: 0.7; /* 提高透明度 */
-            animation-duration: 25s;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
-        }
-        
-        .fish-large {
-            width: 70px;
-            height: 70px;
-            opacity: 0.5; /* 提高透明度 */
-            animation-duration: 30s;
-            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
-        }
-        
-        .fish-fast {
-            animation-duration: 10s;
-            opacity: 0.8; /* 提高透明度 */
-        }
-        
-        .fish-slow {
-            animation-duration: 40s;
-            opacity: 0.4; /* 提高透明度 */
-        }
-        
-        .fish-reverse {
-            animation-direction: reverse;
-            animation-delay: 0s;
-        }
-        
-        /* 特别清晰的大鱼 */
-        .fish-special {
-            opacity: 0.6; /* 提高透明度 */
-            filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.25)) brightness(1.1) contrast(1.1);
-        }
+        .fish-small { width: 28px; height: 28px; opacity: 0.65; animation-duration: 15s; }
+        .fish-medium { width: 42px; height: 42px; opacity: 0.7; animation-duration: 24s; }
+        .fish-large { width: 72px; height: 72px; opacity: 0.55; animation-duration: 32s; }
+        .fish-fast { animation-duration: 10s; opacity: 0.8; }
+        .fish-slow { animation-duration: 45s; opacity: 0.45; }
+        .fish-reverse { animation-direction: reverse; }
+        .fish-special { opacity: 0.65; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25)); }
         
         @keyframes swim {
-            0% {
-                transform: translateX(-100px) rotate(0deg);
-            }
-            100% {
-                transform: translateX(calc(100vw + 100px)) rotate(360deg);
-            }
+            0% { transform: translateX(-120px) rotate(0deg); }
+            100% { transform: translateX(calc(100vw + 120px)) rotate(360deg); }
         }
-        
-        /* 添加新的垂直游动动画 */
-        .fish-vertical {
-            animation: swimVertical 25s linear infinite;
-        }
-        
+        .fish-vertical { animation: swimVertical 28s linear infinite; }
         @keyframes swimVertical {
-            0% {
-                transform: translateY(-100px) rotate(90deg);
-            }
-            100% {
-                transform: translateY(calc(100vh + 100px)) rotate(450deg);
-            }
+            0% { transform: translateY(-120px) rotate(90deg); }
+            100% { transform: translateY(calc(100vh + 120px)) rotate(450deg); }
         }
-        
-        /* 添加新的对角线游动动画 */
-        .fish-diagonal {
-            animation: swimDiagonal 30s linear infinite;
-        }
-        
+        .fish-diagonal { animation: swimDiagonal 32s linear infinite; }
         @keyframes swimDiagonal {
-            0% {
-                transform: translate(-100px, -100px) rotate(45deg);
-            }
-            100% {
-                transform: translate(calc(100vw + 100px), calc(100vh + 100px)) rotate(405deg);
-            }
+            0% { transform: translate(-120px, -120px) rotate(45deg); }
+            100% { transform: translate(calc(100vw + 120px), calc(100vh + 120px)) rotate(405deg); }
         }
         
-        /* 点击特效 */
         .click-effect {
             position: absolute;
             width: 10px;
@@ -150,833 +87,503 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 1000;
-            opacity: 0.7;
+            opacity: 0.6;
             animation: ripple 1s ease-out forwards;
         }
-        
         @keyframes ripple {
-            0% {
-                transform: scale(0.1);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
+            0% { transform: scale(0.1); opacity: 0.6; }
+            100% { transform: scale(2.5); opacity: 0; }
         }
         
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 30px 20px 20px;
+            padding: 30px 25px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            z-index: 1;
-            background-color: rgba(245, 247, 250, 0.3); /* 降低背景透明度，让鱼更清晰 */
-            border-radius: 16px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            z-index: 2;
+            background-color: rgba(245, 248, 255, 0.28);
+            backdrop-filter: blur(1px);
+            border-radius: 28px;
+            margin-top: 25px;
+            margin-bottom: 25px;
         }
         
         header {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             width: 100%;
-            padding-top: 20px;
         }
         
         h1 {
-            font-size: 42px;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            font-size: 46px;
+            background: linear-gradient(145deg, #2a5c8a, #6b4fbb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow: 0 5px 15px rgba(37, 117, 252, 0.15);
         }
         
         .subtitle {
-            color: #2c3e50;
-            font-size: 20px;
-            margin-bottom: 60px;
-            min-height: 30px;
+            color: #1e3a5f;
+            font-size: 22px;
             font-weight: 500;
+            min-height: 36px;
+            margin-bottom: 25px;
         }
         
         .tagline {
             display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #4364ad, #5f2b8c);
             color: white;
-            border-radius: 25px;
-            font-size: 16px;
+            border-radius: 40px;
+            font-size: 17px;
             margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
+            box-shadow: 0 8px 20px rgba(67, 100, 173, 0.25);
+            backdrop-filter: blur(4px);
         }
+        /* 移除不需要的文字，但保留tagline结构，内容在JS中清空/隐藏 */
         
         .main-link {
             display: inline-block;
-            background-color: #fff;
-            padding: 15px 30px;
-            border-radius: 30px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(8px);
+            padding: 14px 32px;
+            border-radius: 40px;
             text-decoration: none;
-            color: #6a11cb;
+            color: #2a4f7c;
             font-weight: bold;
             font-size: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
-            margin-bottom: 40px;
-            border: 2px solid #eef2f7;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 45px;
+            border: 1px solid rgba(255,255,255,0.5);
         }
-        
         .main-link:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            color: #2575fc;
+            box-shadow: 0 18px 30px rgba(37, 99, 235, 0.2);
+            background: white;
+            color: #1e4a7a;
         }
         
-        .main-link:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: 0.5s;
-        }
-        
-        .main-link:hover:after {
-            left: 100%;
-        }
-        
-        .main-link i {
-            margin-right: 10px;
-        }
-        
-        /* 分类分组样式 */
         .category-group {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid rgba(110, 130, 180, 0.15);
             width: 100%;
             text-align: center;
         }
-        
-        .category-group:last-child {
-            border-bottom: none;
-            margin-bottom: 10px;
-            padding-bottom: 0;
-        }
+        .category-group:last-child { border-bottom: none; }
         
         .category-title {
-            font-size: 22px;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            position: relative;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 28px;
             display: inline-block;
-            padding: 0 15px;
+            padding: 0 20px;
+            position: relative;
+            letter-spacing: 1px;
         }
-        
         .category-title:before, .category-title:after {
             content: '';
             position: absolute;
             top: 50%;
-            width: 50px;
-            height: 2px;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            border-radius: 2px;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #6d8ec0, #9b6ab0);
+            border-radius: 3px;
         }
+        .category-title:before { left: -80px; }
+        .category-title:after { right: -80px; }
         
-        .category-title:before {
-            left: -60px;
-        }
-        
-        .category-title:after {
-            right: -60px;
-        }
-        
-        /* 卡片网格 - 固定宽度布局 */
         .nav-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+            gap: 28px;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
         
-        /* 统一卡片大小 - 调整高度适应无图标 */
+        /* 卡片 —— 使用emoji大图标 */
         .nav-card {
-            background-color: rgba(255, 255, 255, 0.95); /* 提高透明度 */
-            border-radius: 16px;
-            padding: 25px 20px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 28px 18px 22px;
             text-align: center;
             text-decoration: none;
-            color: #2c3e50;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
+            color: #1e293b;
+            box-shadow: 0 15px 30px -8px rgba(0, 20, 40, 0.12);
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(240, 240, 240, 0.8); /* 提高透明度 */
+            border: 1px solid rgba(210, 225, 255, 0.6);
             position: relative;
             overflow: hidden;
-            height: 150px; /* 调整高度 */
-            min-height: 150px; /* 调整最小高度 */
+            height: 180px;
+            min-height: 180px;
         }
-        
         .nav-card:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            height: 6px;
+            background: linear-gradient(90deg, #3b71ca, #a855f7);
             transform: scaleX(0);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
-        
         .nav-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            background-color: rgba(255, 255, 255, 1); /* 悬停时增加不透明度 */
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 28px 40px -10px rgba(59, 113, 202, 0.3);
+            background: rgba(255, 255, 255, 1);
+            border-color: #bdd0f0;
         }
+        .nav-card:hover:before { transform: scaleX(1); }
         
-        .nav-card:hover:before {
-            transform: scaleX(1);
-        }
-        
-        .nav-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            line-height: 1.3;
-            padding-top: 10px;
-        }
-        
-        .nav-desc {
-            font-size: 14px;
-            color: #7f8c8d;
-            line-height: 1.4;
-            min-height: 40px;
+        /* 卡片图标区 —— 显示emoji */
+        .card-icon {
+            font-size: 58px;
+            margin-bottom: 18px;
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(145deg, #eef3ff, #ffffff);
+            border-radius: 40px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
         }
+        .nav-card:hover .card-icon {
+            transform: scale(1.08);
+        }
+        
+        .nav-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 4px;
+            line-height: 1.3;
+            letter-spacing: 0.3px;
+        }
+        
+        /* 隐藏描述 */
+        .nav-desc { display: none; }
         
         footer {
             text-align: center;
             color: #2c3e50;
-            font-size: 14px;
-            padding: 25px 0;
+            font-size: 15px;
+            padding: 30px 0 20px;
             width: 100%;
             max-width: 100%;
-            margin: 40px auto 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            z-index: 1;
+            z-index: 2;
         }
-        
         .footer-content {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 15px 30px;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-            background-color: rgba(245, 247, 250, 0.3); /* 降低背景透明度 */
+            padding: 20px 30px;
+            border-radius: 50px;
+            background: rgba(240, 246, 255, 0.35);
+            backdrop-filter: blur(8px);
         }
         
-        .footer-content p {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-        
-        .footer-content p:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* 点击文字特效 */
         .click-text-effect {
             position: absolute;
             pointer-events: none;
             z-index: 1001;
             opacity: 0;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
-            color: #2c3e50;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            color: #1e3a5f;
+            text-shadow: 0 2px 6px rgba(255,255,255,0.9);
             white-space: nowrap;
             animation: textFloat 1.5s ease-out forwards;
-            user-select: none;
         }
-        
         @keyframes textFloat {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-            20% {
-                opacity: 1;
-                transform: translate(-50%, -100%) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -200%) scale(1.2);
-            }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+            20% { opacity: 1; transform: translate(-50%, -110%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -220%) scale(1.3); }
         }
         
-        /* 响应式设计 */
         @media (max-width: 1200px) {
-            .nav-grid {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: 1000px;
-            }
-            
-            .nav-card {
-                height: 150px; /* 调整高度 */
-                min-height: 150px; /* 调整最小高度 */
-            }
-            
-            .footer-content {
-                max-width: 1000px;
-            }
+            .nav-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        
         @media (max-width: 992px) {
-            .nav-grid {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 700px;
-                gap: 20px;
-            }
-            
-            .nav-card {
-                width: 100%;
-                min-width: 100%;
-                height: 150px; /* 调整高度 */
-                min-height: 150px; /* 调整最小高度 */
-            }
-            
-            .category-title:before, .category-title:after {
-                width: 30px;
-            }
-            
-            .category-title:before {
-                left: -40px;
-            }
-            
-            .category-title:after {
-                right: -40px;
-            }
-            
-            h1 {
-                font-size: 36px;
-            }
-            
-            .category-title {
-                font-size: 20px;
-            }
-            
-            .nav-card {
-                height: 150px; /* 调整高度 */
-                min-height: 150px; /* 调整最小高度 */
-                padding: 20px 15px;
-            }
-            
-            .footer-content {
-                max-width: 700px;
-                padding: 20px 0px;
-            }
+            .nav-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+            .category-title:before, .category-title:after { width: 35px; }
+            .category-title:before { left: -50px; }
+            .category-title:after { right: -50px; }
         }
-        
         @media (max-width: 768px) {
-            .nav-grid {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-                gap: 15px;
-            }
-            
-            .nav-card {
-                width: 100%;
-                min-width: 100%;
-                height: 150px; /* 调整高度 */
-                min-height: 150px; /* 调整最小高度 */
-                max-width: 500px;
-                margin: 0 auto;
-            }
-            
-            body {
-                padding: 0;
-            }
-            
-            .main-link {
-                padding: 12px 20px;
-                font-size: 16px;
-            }
-            
-            .category-title {
-                font-size: 18px;
-            }
-            
-            .category-title:before, .category-title:after {
-                display: none;
-            }
-            
-            .nav-card {
-                height: 150px; /* 调整高度 */
-                min-height: 150px; /* 调整最小高度 */
-                padding: 18px 12px;
-            }
-            
-            .nav-title {
-                font-size: 18px;
-            }
-            
-            .nav-desc {
-                font-size: 13px;
-            }
-            
-            .footer-content {
-                max-width: 100%;
-                padding: 18px 20px;
-                margin: 0 0px;
-            }
-            
-            h1 {
-                font-size: 32px;
-            }
-            
-            .subtitle {
-                font-size: 18px;
-            }
-            
-            .tagline {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .nav-grid {
-                max-width: 400px;
-            }
-            
-            .nav-card {
-                max-width: 400px;
-                height: 120px; /* 调整高度 */
-                min-height: 120px; /* 调整最小高度 */
-            }
-            
-            .footer-content {
-                max-width: 400px;
-                margin: 0 10px;
-            }
-            
-            h1 {
-                font-size: 28px;
-            }
+            .nav-grid { grid-template-columns: 1fr; max-width: 480px; }
+            .nav-card { max-width: 480px; margin: 0 auto; height: 170px; }
+            .category-title:before, .category-title:after { display: none; }
+            h1 { font-size: 38px; }
         }
     </style>
 </head>
 <body>
-    <!-- 游动的鱼背景 -->
-    <div class="fish-background" id="fishBackground">
-        <!-- 鱼将在JavaScript中动态生成 -->
-    </div>
+    <div class="fish-background" id="fishBackground"></div>
     
     <div class="container">
         <header>
             <h1>小鱼导航</h1>
             <p class="subtitle" id="subtitle">一个链接，聚合、分享你的所有信息</p>
+            <!-- tagline 已清空 (移除“随心所向 · 200+ 灵动图标”) -->
+            <div class="tagline" id="tagline" style="display: none;"></div>
         </header>
         
         <!-- 常用分类 -->
         <div class="category-group">
-            <h2 class="category-title">常用</h2>
-            <div class="nav-grid">
-                <a href="https://sshd.mysxl.cn/" class="nav-card" target="_blank">
-                    <div class="nav-title">博客</div>
-                    <div class="nav-desc">个人博客</div>
-                </a>
-                
-                <a href="https://yun.vivo.com.cn/" class="nav-card" target="_blank">
-                    <div class="nav-title">维沃云服务</div>
-                    <div class="nav-desc">手机云服务</div>
-                </a>
-                <a href="https://cloud.hihonor.com/" class="nav-card" target="_blank">
-                    <div class="nav-title">荣耀云服务</div>
-                    <div class="nav-desc">手机云服务</div>
-                </a>
-                
-                <a href="https://gitee.com/sshd/xiaoyu" class="nav-card" target="_blank">
-                    <div class="nav-title">小鱼开源</div>
-                    <div class="nav-desc">代码仓库</div>
-                </a>
-            </div>
+            <h2 class="category-title"><i class="fa-regular fa-star" style="margin-right: 12px;"></i>常用</h2>
+            <div class="nav-grid" id="grid-common"></div>
         </div>
         
         <!-- 影视分类 -->
         <div class="category-group">
-            <h2 class="category-title">影视</h2>
-            <div class="nav-grid">
-                <a href="https://tv.baozangdh.com/" class="nav-card" target="_blank">
-                    <div class="nav-title">影视宝藏</div>
-                    <div class="nav-desc">免费影视导航</div>
-                </a>
-                
-                <a href="https://www.klyingshi.top/" class="nav-card" target="_blank">
-                    <div class="nav-title">可乐影视</div>
-                    <div class="nav-desc">免费影视导航</div>
-                </a>
-                
-                <a href="https://yinghezhinan.com/" class="nav-card" target="_blank">
-                    <div class="nav-title">硬核影视</div>
-                    <div class="nav-desc">免费影视导航</div>
-                </a>
-                
-                <a href="https://faxianx.com/" class="nav-card" target="_blank">
-                    <div class="nav-title">发现之门</div>
-                    <div class="nav-desc">免费影视导航</div>
-                </a>
-
-                <a href="https://kimivod.com/" class="nav-card" target="_blank">
-                    <div class="nav-title">kimivod</div>
-                    <div class="nav-desc">在线影视</div>
-                </a>
-                
-                <a href="https://hellociqryx6e.com/" class="nav-card" target="_blank">
-                    <div class="nav-title">极光影视</div>
-                    <div class="nav-desc">在线影视</div>
-                </a>
-                
-                <a href="https://www.zxzjys.com/" class="nav-card" target="_blank">
-                    <div class="nav-title">在线之家</div>
-                    <div class="nav-desc">在线影视</div>
-                </a>
-                
-                <a href="https://gaze.run/" class="nav-card" target="_blank">
-                    <div class="nav-title">注视影视</div>
-                    <div class="nav-desc">在线影视</div>
-                </a>
-
-            </div>
+            <h2 class="category-title"><i class="fa-solid fa-clapperboard" style="margin-right: 12px;"></i>影视</h2>
+            <div class="nav-grid" id="grid-movie"></div>
         </div>
 
         <!-- 下载分类 -->
         <div class="category-group">
-            <h2 class="category-title">下载</h2>
-            <div class="nav-grid">
-                <a href="https://yinghezhinan.com/ios-app/" class="nav-card" target="_blank">
-                    <div class="nav-title">变身影视</div>
-                    <div class="nav-desc">iOS追剧必备</div>
-                </a>
-                
-                <a href="https://www.dyg55.com/" class="nav-card" target="_blank">
-                    <div class="nav-title">电影港网</div>
-                    <div class="nav-desc">无水印4K影视</div>
-                </a>
-                
-                <a href="https://www.mjf2020.com/" class="nav-card" target="_blank">
-                    <div class="nav-title">美剧粉</div>
-                    <div class="nav-desc">纯粹的美剧网</div>
-                </a>
-                
-                <a href="https://www.hdzu.cc/" class="nav-card" target="_blank">
-                    <div class="nav-title">高清族</div>
-                    <div class="nav-desc">电影种子资源站</div>
-                </a>
-
-            </div>
+            <h2 class="category-title"><i class="fa-solid fa-download" style="margin-right: 12px;"></i>下载</h2>
+            <div class="nav-grid" id="grid-download"></div>
         </div>
     </div>
     
     <footer>
         <div class="footer-content">
-            <p>向海风许愿，在山海相见</p>
-            <p>© 2026 罗小鱼 · 个人导航 | 影视导航</p>
+            <p>✨ 向海风许愿，在山海相见 ✨</p>
+            <p>© 2026 罗小鱼 · 灵动导航 | Emoji 图标 · 影视聚合</p>
         </div>
     </footer>
 
     <script>
-    // 游动的鱼背景初始化 - 优化清晰度
-    function initFishBackground() {
-        const fishContainer = document.getElementById('fishBackground');
-        const fishClasses = ['fish-small', 'fish-medium', 'fish-large', 'fish-fast', 'fish-slow', 'fish-reverse', 'fish-vertical', 'fish-diagonal'];
-        
-        // 8种不同颜色的鱼类图标
-        const fishTypes = [
-            'https://img.icons8.com/color/96/000000/fish.png', // 橙色鱼
-            'https://img.icons8.com/color/96/000000/clown-fish.png', // 小丑鱼
-            'https://img.icons8.com/color/96/000000/koi-fish.png', // 鲤鱼
-            'https://img.icons8.com/color/96/000000/dolphin.png', // 海豚
-            'https://img.icons8.com/color/96/000000/whale.png' // 鲸鱼
-        ];
-        
-        const fishColors = [
-            '#6a11cb',    // 紫色
-            '#2575fc',    // 蓝色
-            '#4CAF50',    // 绿色
-            '#FF9800',    // 橙色
-            '#E91E63',    // 粉色
-            '#9C27B0',    // 深紫色
-            '#00BCD4',    // 青色
-            '#FF5722',    // 深橙色
-            '#795548',    // 棕色
-            '#607D8B'     // 蓝灰色
-        ];
-        
-        // 创建120条鱼（减少数量以提高性能）
-        for (let i = 0; i < 120; i++) {
-            const fish = document.createElement('div');
-            fish.className = 'fish';
+        (function(){
+            "use strict";
+
+            // ---------- 游动的鱼背景 (保留超过200个元素) ----------
+            function initFishBackground() {
+                const fishContainer = document.getElementById('fishBackground');
+                const fishUrls = [
+                    'https://img.icons8.com/color/96/fish.png',
+                    'https://img.icons8.com/color/96/clown-fish.png',
+                    'https://img.icons8.com/color/96/koi-fish.png',
+                    'https://img.icons8.com/color/96/dolphin.png',
+                    'https://img.icons8.com/color/96/whale.png',
+                    'https://img.icons8.com/color/96/starfish.png',
+                    'https://img.icons8.com/color/96/seahorse.png',
+                    'https://img.icons8.com/color/96/jellyfish.png',
+                    'https://img.icons8.com/color/96/turtle.png',
+                    'https://img.icons8.com/color/96/crab.png',
+                    'https://img.icons8.com/color/96/octopus.png'
+                ];
+                const fishClasses = ['fish-small','fish-medium','fish-large','fish-fast','fish-slow','fish-reverse','fish-vertical','fish-diagonal'];
+                
+                for (let i = 0; i < 220; i++) {
+                    const fish = document.createElement('div');
+                    fish.className = 'fish';
+                    const img = document.createElement('img');
+                    img.src = fishUrls[Math.floor(Math.random() * fishUrls.length)];
+                    img.alt = 'fish';
+                    img.style.filter = `hue-rotate(${Math.random()*60-30}deg) brightness(${0.9+Math.random()*0.5}) contrast(${1.0+Math.random()*0.4})`;
+                    fish.appendChild(img);
+                    fish.style.top = `${Math.random()*100}vh`;
+                    fish.style.left = `${Math.random()*100}vw`;
+                    fish.style.animationDelay = `-${Math.random()*50}s`;
+                    fish.style.animationDuration = `${8 + Math.random()*45}s`;
+                    const size = 20 + Math.random()*80;
+                    fish.style.width = `${size}px`; fish.style.height = `${size}px`;
+                    fish.style.opacity = `${0.35+Math.random()*0.55}`;
+                    fish.classList.add(fishClasses[Math.floor(Math.random()*fishClasses.length)]);
+                    fishContainer.appendChild(fish);
+                }
+                // 额外大鱼
+                for (let i=0;i<18;i++) {
+                    const big = document.createElement('div');
+                    big.className = 'fish fish-large fish-special';
+                    const img = document.createElement('img');
+                    img.src = Math.random()>0.5 ? 'https://img.icons8.com/color/96/whale.png' : 'https://img.icons8.com/color/96/dolphin.png';
+                    img.style.filter = `hue-rotate(${Math.random()*30}deg) brightness(1.15)`;
+                    big.appendChild(img);
+                    big.style.top = `${Math.random()*100}vh`; big.style.left = `${Math.random()*100}vw`;
+                    big.style.animationDelay = `-${Math.random()*70}s`;
+                    big.style.width='95px'; big.style.height='95px';
+                    big.style.opacity='0.6';
+                    big.classList.add(Math.random()>0.5?'fish-diagonal':'fish-vertical');
+                    fishContainer.appendChild(big);
+                }
+                for (let i=0;i<30;i++) {
+                    const fast = document.createElement('div');
+                    fast.className = 'fish fish-small fish-fast';
+                    const img = document.createElement('img');
+                    img.src = 'https://img.icons8.com/color/96/clown-fish.png';
+                    img.style.filter = `hue-rotate(${Math.random()*40-20}deg) brightness(1.3)`;
+                    fast.appendChild(img);
+                    fast.style.top = `${Math.random()*100}vh`; fast.style.left = `${Math.random()*100}vw`;
+                    fast.style.width='32px'; fast.style.height='32px'; fast.style.opacity='0.8';
+                    fishContainer.appendChild(fast);
+                }
+            }
+
+            // ---------- 使用提供的Emoji列表 ----------
+            const emojiList = [
+                '😊', '😄', '😃', '😀', '😁', '😆', '😅', '🤣', '😂', '🙂',
+                '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚', '🤗',
+                '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏', '😣', '😥', '😮',
+                '👍',  '👊', '✊', '🤛', '🤜', '🤚', '👋', '🤟', '🤘',
+                '👌', '🤌', '🤏', '✌️', '🤞', '🎮', '📱', '💻', '🖥️', '⌨️',
+                '🖱️', '🖨️', '📀', '💾', '☁️', '🌐', '📡', '📺', '📻', '🎙️',
+                '🎬', '🎭', '🎪', '🎨', '🎯', '🎲', '🎸', '🎹', '🎺', '🎻',
+                '📚', '📖', '📝', '✏️', '🔖', '🚀', '🛸', '✨', '⭐', '🌟',
+                '🍎', '🍕', '🍔', '🍟', '🌮', '🍦', '🍩', '🍪', '☕', '🍷',
+                '🐶', '🐱', '🦊', '🐼', '🐨', '🐸', '🐧', '🦄', '🐝', '🐞',
+                '❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '🤍', '💕', '💖',
+                '👾', '🤖', '👽', '💀', '👻', '🎃', '😈', '👹', '👺', '🤡',
+                '⚽', '🏀', '🏈', '⚾', '🎾', '🏐', '🏓', '🏸', '🥊', '🏆',
+                '🔔', '🎵', '🎶', '📢', '📣', '💬', '💭', '🔧', '🔨', '⚒️',
+                '🌲', '🌳', '🌴', '🌵', '🌾', '🌿', '☘️', '🍀', '🌸', '🌼',
+                '🏠', '🏡', '🏢', '🏣', '🏥', '🏦', '🏨', '⛪', '🕌', '🗽'
+            ];
             
-            // 创建图片元素
-            const fishImg = document.createElement('img');
-            const fishTypeIndex = Math.floor(Math.random() * fishTypes.length);
-            fishImg.src = fishTypes[fishTypeIndex];
-            fishImg.alt = '鱼';
-            
-            // 使用更清晰的颜色调整
-            const hueRotate = Math.random() * 60 - 30; // 限制在-30到30度之间，避免颜色太奇怪
-            const brightness = 0.9 + Math.random() * 0.3; // 提高亮度
-            const contrast = 1.1 + Math.random() * 0.3; // 提高对比度
-            
-            fishImg.style.filter = `hue-rotate(${hueRotate}deg) brightness(${brightness}) contrast(${contrast})`;
-            fish.appendChild(fishImg);
-            
-            // 在全屏范围内随机位置
-            fish.style.top = `${Math.random() * 100}vh`;
-            fish.style.left = `${Math.random() * 100}vw`;
-            
-            fish.style.animationDelay = `-${Math.random() * 40}s`;
-            fish.style.animationDuration = `${10 + Math.random() * 40}s`;
-            
-            // 随机大小 - 增加最小值
-            const size = 25 + Math.random() * 70;
-            fish.style.width = `${size}px`;
-            fish.style.height = `${size}px`;
-            
-            // 提高透明度
-            const opacity = 0.4 + Math.random() * 0.5;
-            fish.style.opacity = `${opacity}`;
-            
-            // 随机添加额外的动画类
-            const extraClass = fishClasses[Math.floor(Math.random() * fishClasses.length)];
-            fish.classList.add(extraClass);
-            
-            // 减少模糊度
-            fish.style.filter = `blur(${Math.random() * 0.3}px)`; // 减少模糊
-            fish.style.transform = `rotate(${Math.random() * 360}deg)`;
-            
-            // 添加轻微的颜色滤镜
-            const randomColor = fishColors[Math.floor(Math.random() * fishColors.length)];
-            fishImg.style.filter += ` drop-shadow(0 1px 2px ${randomColor}30)`;
-            
-            // 添加鼠标悬停效果
-            fish.addEventListener('mouseenter', function() {
-                this.style.opacity = '0.9';
-                this.style.filter = 'blur(0px) brightness(1.3)';
-                this.querySelector('img').style.transform = 'scale(1.2)';
+            function getRandomEmoji() {
+                return emojiList[Math.floor(Math.random() * emojiList.length)];
+            }
+
+            // 卡片数据 (无desc)
+            const commonLinks = [
+                { title: '博客', url: 'https://sshd.mysxl.cn/' },
+                { title: '维沃云服务', url: 'https://yun.vivo.com.cn/' },
+                { title: '荣耀云服务', url: 'https://cloud.hihonor.com/' },
+                { title: '小鱼开源', url: 'https://gitee.com/sshd/xiaoyu' }
+            ];
+            const movieLinks = [
+                { title: '影视宝藏', url: 'https://tv.baozangdh.com/' },
+                { title: '可乐影视', url: 'https://www.klyingshi.top/' },
+                { title: '硬核影视', url: 'https://yinghezhinan.com/' },
+                { title: '发现之门', url: 'https://faxianx.com/' },
+                { title: 'kimivod', url: 'https://kimivod.com/' },
+                { title: '极光影视', url: 'https://hellociqryx6e.com/' },
+                { title: '在线之家', url: 'https://www.zxzjys.com/' },
+                { title: '注视影视', url: 'https://gaze.run/' }
+            ];
+            const downloadLinks = [
+                { title: '变身影视', url: 'https://yinghezhinan.com/ios-app/' },
+                { title: '电影港网', url: 'https://www.dyg55.com/' },
+                { title: '美剧粉', url: 'https://www.mjf2020.com/' },
+                { title: '高清族', url: 'https://www.hdzu.cc/' }
+            ];
+
+            function renderCards(containerId, items) {
+                const grid = document.getElementById(containerId);
+                if (!grid) return;
+                grid.innerHTML = '';
+                items.forEach(item => {
+                    const a = document.createElement('a');
+                    a.className = 'nav-card';
+                    a.href = item.url;
+                    a.target = '_blank';
+                    
+                    const iconDiv = document.createElement('div');
+                    iconDiv.className = 'card-icon';
+                    // 使用Emoji代替FontAwesome图标
+                    iconDiv.textContent = getRandomEmoji();
+                    
+                    const titleDiv = document.createElement('div');
+                    titleDiv.className = 'nav-title';
+                    titleDiv.textContent = item.title;
+                    
+                    a.appendChild(iconDiv);
+                    a.appendChild(titleDiv);
+                    grid.appendChild(a);
+                });
+            }
+
+            // 页面加载
+            window.addEventListener('load', function() {
+                initFishBackground();
+                
+                renderCards('grid-common', commonLinks);
+                renderCards('grid-movie', movieLinks);
+                renderCards('grid-download', downloadLinks);
+                
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.6s';
+                setTimeout(() => document.body.style.opacity = '1', 80);
+                
+                const allCards = document.querySelectorAll('.nav-card');
+                allCards.forEach((card, idx) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(15px)';
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.5s, transform 0.5s';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100 + idx * 30);
+                });
+                
+                const footer = document.querySelector('.footer-content');
+                if(footer) {
+                    footer.style.opacity = '0';
+                    setTimeout(() => { footer.style.transition = 'opacity 0.8s'; footer.style.opacity = '1'; }, 400);
+                }
             });
-            
-            fish.addEventListener('mouseleave', function() {
-                const originalOpacity = this.classList.contains('fish-small') ? 0.6 : 
-                                       this.classList.contains('fish-medium') ? 0.7 : 
-                                       this.classList.contains('fish-large') ? 0.5 : 0.4;
-                this.style.opacity = originalOpacity;
-                this.style.filter = `blur(${Math.random() * 0.3}px)`;
-                this.querySelector('img').style.transform = 'scale(1)';
+
+            // 点击特效 (保留)
+            document.addEventListener('click', function(e) {
+                const effect = document.createElement('div');
+                effect.className = 'click-effect';
+                const colors = ['#3b71ca','#a855f7','#0ea5e9','#f97316','#8b5cf6'];
+                effect.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+                effect.style.left = e.clientX + 'px';
+                effect.style.top = e.clientY + 'px';
+                document.body.appendChild(effect);
+                setTimeout(() => effect.remove(), 1000);
+                
+                const textEffect = document.createElement('div');
+                textEffect.className = 'click-text-effect';
+                const texts = ['🐟 自由','🐠 灵动','🐡 探索','🌊 深蓝','✨ 闪耀','⚡ 极速','💧 清澈','🌀 旋转'];
+                textEffect.textContent = texts[Math.floor(Math.random()*texts.length)];
+                textEffect.style.left = e.clientX + 'px';
+                textEffect.style.top = e.clientY + 'px';
+                document.body.appendChild(textEffect);
+                setTimeout(() => textEffect.remove(), 1400);
             });
-            
-            fishContainer.appendChild(fish);
-        }
-        
-        // 添加一些特别清晰的大鱼
-        for (let i = 0; i < 8; i++) {
-            const specialFish = document.createElement('div');
-            specialFish.className = 'fish fish-large fish-special';
-            
-            const fishImg = document.createElement('img');
-            // 使用鲸鱼或海豚作为特别大的鱼
-            const specialType = Math.random() > 0.5 ? 'https://img.icons8.com/color/96/000000/whale.png' : 'https://img.icons8.com/color/96/000000/dolphin.png';
-            fishImg.src = specialType;
-            fishImg.alt = '大鱼';
-            fishImg.style.filter = `hue-rotate(${Math.random() * 40 - 20}deg) brightness(1.2) contrast(1.3)`;
-            
-            specialFish.appendChild(fishImg);
-            
-            specialFish.style.top = `${Math.random() * 100}vh`;
-            specialFish.style.left = `${Math.random() * 100}vw`;
-            specialFish.style.animationDelay = `-${Math.random() * 60}s`;
-            specialFish.style.animationDuration = `${50 + Math.random() * 40}s`;
-            specialFish.style.width = '90px';
-            specialFish.style.height = '90px';
-            specialFish.style.opacity = '0.6';
-            
-            // 添加对角线或垂直动画
-            if (Math.random() > 0.5) {
-                specialFish.classList.add('fish-diagonal');
-            } else {
-                specialFish.classList.add('fish-vertical');
+
+            // 动态问候
+            const greetings = ["欢迎来到小鱼导航", "Emoji 图标随心配", "影视聚合·下载无忧", "一个链接，无限可能", "小鱼 · 灵动空间"];
+            let idx = 0;
+            const subtitle = document.getElementById('subtitle');
+            if(subtitle) {
+                subtitle.textContent = greetings[0];
+                setInterval(() => {
+                    idx = (idx + 1) % greetings.length;
+                    subtitle.textContent = greetings[idx];
+                }, 4500);
             }
             
-            fishContainer.appendChild(specialFish);
-        }
-        
-        // 添加一些快速游动的小鱼，更清晰
-        for (let i = 0; i < 15; i++) {
-            const fastFish = document.createElement('div');
-            fastFish.className = 'fish fish-small fish-fast';
-            
-            const fishImg = document.createElement('img');
-            fishImg.src = 'https://img.icons8.com/color/96/000000/clown-fish.png';
-            fishImg.alt = '快速小鱼';
-            fishImg.style.filter = `hue-rotate(${Math.random() * 30 - 15}deg) brightness(1.3) contrast(1.2)`;
-            
-            fastFish.appendChild(fishImg);
-            
-            fastFish.style.top = `${Math.random() * 100}vh`;
-            fastFish.style.left = `${Math.random() * 100}vw`;
-            fastFish.style.animationDelay = `-${Math.random() * 20}s`;
-            fastFish.style.animationDuration = `${5 + Math.random() * 10}s`;
-            fastFish.style.width = '30px';
-            fastFish.style.height = '30px';
-            fastFish.style.opacity = '0.8';
-            fastFish.style.filter = 'blur(0.1px)'; // 几乎不模糊
-            
-            fishContainer.appendChild(fastFish);
-        }
-    }
-    
-    // 页面加载完成后初始化
-    window.addEventListener('load', function() {
-        initFishBackground();
-        
-        // 页面加载动画
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.5s ease';
-        
-        setTimeout(() => {
-            document.body.style.opacity = '1';
-        }, 100);
-        
-        // 卡片逐个显示效果
-        const cards = document.querySelectorAll('.nav-card');
-        cards.forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 300 + index * 50);
-        });
-        
-        // 分类组逐个显示效果
-        const groups = document.querySelectorAll('.category-group');
-        groups.forEach((group, index) => {
-            group.style.opacity = '0';
-            group.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                group.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                group.style.opacity = '1';
-                group.style.transform = 'translateY(0)';
-            }, 500 + index * 100);
-        });
-        
-        // 底部显示效果
-        const footerContent = document.querySelector('.footer-content');
-        footerContent.style.opacity = '0';
-        footerContent.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            footerContent.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            footerContent.style.opacity = '1';
-            footerContent.style.transform = 'translateY(0)';
-        }, 800);
-    });
-    
-    // 点击特效
-    document.addEventListener('click', function(e) {
-        // 创建点击效果元素
-        const effect = document.createElement('div');
-        effect.className = 'click-effect';
-        
-        const colors = ['#6a11cb', '#2575fc', '#ff9a00', '#FF9A9E', '#84FAB0'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        
-        effect.style.left = e.clientX + 'px';
-        effect.style.top = e.clientY + 'px';
-        effect.style.backgroundColor = color;
-        
-        document.body.appendChild(effect);
-        
-        setTimeout(() => {
-            effect.remove();
-        }, 1000);
-        
-        // 创建文字效果元素
-        const textEffect = document.createElement('div');
-        textEffect.className = 'click-text-effect';
-        
-        const texts = ['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '友善'];
-        const text = texts[Math.floor(Math.random() * texts.length)];
-        
-        textEffect.textContent = text;
-        textEffect.style.left = e.clientX + 'px';
-        textEffect.style.top = e.clientY + 'px';
-        
-        document.body.appendChild(textEffect);
-        
-        setTimeout(() => {
-            textEffect.remove();
-        }, 1500);
-    });
-    
-    // 动态问候语
-    const greetings = [
-        "欢迎来到我的导航页",
-        "高效生活，从这里开始",
-        "聚合所有常用链接",
-        "一个链接，访问所有",
-        "让网络生活更便捷",
-        "常用链接，一网打尽",
-        "你的个性化导航中心",
-        "探索更多可能"
-    ];
-    
-    let currentGreetingIndex = 0;
-    const subtitle = document.getElementById('subtitle');
-    
-    subtitle.textContent = greetings[currentGreetingIndex];
-    
-    setInterval(() => {
-        currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
-        subtitle.textContent = greetings[currentGreetingIndex];
-    }, 5000);
-    
-    // 导航卡片点击统计
-    document.querySelectorAll('.nav-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const title = this.querySelector('.nav-title').textContent;
-            console.log(`导航卡片被点击: ${title}`);
-        });
-    });
-</script>
+            // 隐藏tagline (移除指定文字)
+            const taglineEl = document.getElementById('tagline');
+            if(taglineEl) taglineEl.style.display = 'none';
+        })();
+    </script>
 </body>
 </html>
