@@ -233,6 +233,7 @@
             overflow: hidden;
             height: 180px;
             min-height: 180px;
+            width: 100%;
         }
         .nav-card:before {
             content: '';
@@ -332,10 +333,31 @@
             .category-title:after { right: -50px; }
         }
         @media (max-width: 768px) {
-            .nav-grid { grid-template-columns: 1fr; max-width: 480px; }
-            .nav-card { max-width: 480px; margin: 0 auto; height: 170px; }
-            .category-title:before, .category-title:after { display: none; }
-            h1 { font-size: 38px; }
+            .nav-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .nav-card {
+                width: 100%;
+                max-width: 100%;
+                height: 170px;
+                margin: 0;
+            }
+            
+            .category-title:before, .category-title:after {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 38px;
+            }
+            
+            .container {
+                padding: 20px 15px 15px;
+            }
         }
     </style>
 </head>
@@ -346,7 +368,7 @@
         <header>
             <h1>小鱼导航</h1>
             <p class="subtitle" id="subtitle">一个链接，聚合、分享你的所有信息</p>
-            <!-- tagline 已清空 (移除“随心所向 · 200+ 灵动图标”) -->
+            <!-- tagline 已清空 (移除"随心所向 · 200+ 灵动图标") -->
             <div class="tagline" id="tagline" style="display: none;"></div>
         </header>
         
